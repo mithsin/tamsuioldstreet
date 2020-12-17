@@ -1,7 +1,8 @@
 import React from 'react';
+import ItemCard from 'Components/Card/ItemCard';
 import './styles.scss';
 
-const ItemCard = ({
+const ItemCardS = ({
     imgSrc,
     itemNumber,
     title,

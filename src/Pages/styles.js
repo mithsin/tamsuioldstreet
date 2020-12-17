@@ -23,6 +23,9 @@ export const HeaderStyles = createUseStyles({
         fontSize: '1.5rem',
         marginRight: '1rem',
         cursor: 'pointer',
+        '&:hover': {
+            borderBottom: '3px solid #81bed2',
+        },
     },
 });
 
@@ -32,6 +35,13 @@ export const homeStyles = createUseStyles({
         right: '0px',
         top: '26px',
         zIndex: '99',
+        fontWeight: '600',
+        fontSize: '1.5rem',
+        border: '1px dotted black',
+        backgroundColor: '#fff',
+        textDecoration: 'none',
+        borderRadius: '6px',
+        padding: '8px',
     },
     wrapper: {
         display: 'flex',
