@@ -17,8 +17,8 @@ const ItemCard = ({
             <div className="Item-Card-Text">
                 <h2>{title}</h2>
                 <p>{description}</p>
-                <span>{price}</span>
-                <button>Add To Cart</button>
+                <span>${price}</span>
+                <button>Detail</button>
             </div>
         </div>
     );

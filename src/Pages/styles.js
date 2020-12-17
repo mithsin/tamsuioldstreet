@@ -27,6 +27,12 @@ export const HeaderStyles = createUseStyles({
 });
 
 export const homeStyles = createUseStyles({
+    HomeOrderOnline: {
+        position: 'fixed',
+        right: '0px',
+        top: '26px',
+        zIndex: '99',
+    },
     wrapper: {
         display: 'flex',
         flexBasis: '1440px',
@@ -52,16 +58,17 @@ export const homeStyles = createUseStyles({
         gridTemplateColumns: 'repeat(4, 1fr)',
         maxWidth: '1200px',
         margin: 'auto',
-        '@media only screen and (max-width: 960px) and (min-width: 600px)': {
-            gridTemplateColumns: 'repeat(2, 1fr)',
-        },
-        '@media only screen and (max-width: 599px)': {
-            gridTemplateColumns: 'auto',
-        }
+        // '@media only screen and (max-width: 960px) and (min-width: 600px)': {
+        //     gridTemplateColumns: 'repeat(2, 1fr)',
+        // },
+        // '@media only screen and (max-width: 599px)': {
+        //     gridTemplateColumns: 'auto',
+        // }
     },
     MenuOutterWrap: {
         padding: '8px',
-        margin: '8px',
+        margin: 'auto',
         border: '1px dotted',
+        maxWidth: '1240px',
     }
 });

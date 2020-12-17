@@ -6,8 +6,8 @@ const Header = () => {
     const history = useHistory();
     const classes = HeaderStyles();
     const menuList = [{
-        title: "Menu",
-        link: "/menu",
+        title: "Shout Out",
+        link: "/shout-out",
     },{
         title: "Photos",
         link: "/potos"
@@ -24,7 +24,7 @@ const Header = () => {
                             {type.title}
                         </li>)
                 }
-                <li><a className={classes.MenuLi} href="https://www.clover.com/online-ordering/ic-hot-kennesaw">ORDER ONLINE</a></li>
+                {/* <li><a className={classes.MenuLi} href="https://www.clover.com/online-ordering/ic-hot-kennesaw">ORDER ONLINE</a></li> */}
             </ul>
         </div>
     )

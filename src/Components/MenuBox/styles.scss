@@ -8,6 +8,8 @@
     padding: 16px 0;
     align-content: center;
     align-items: center;
+    border-bottom: 1px solid #818181;
+    margin-bottom: 16px;
     h1 {
         flex: 1 1 30%;
         padding: 0;
@@ -26,7 +28,8 @@
 .Menu-Box-Item-Wrapper {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    // grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 1rem;
 }
 
@@ -72,11 +75,22 @@
         color: #414141;
         background-color: #fff;
         text-align: center;
-        padding: 8px 16px;
+        padding: .5rem 1rem;
+        font-size: 1rem;
     };
     button:hover {
         background-color: #7ad5f3;
         border: 2px solid #818181;
         color: #818181;
     };
+};
+@media only screen and (max-width: 599px) {
+    .Menu-Box-Item-Wrapper {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .Item-Card-Text {
+        h2 {
+            font-size: 1rem;
+        };
+    }
 };

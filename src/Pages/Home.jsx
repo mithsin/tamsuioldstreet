@@ -18,7 +18,6 @@ const Home = () => {
     const acaiBowlImgDefault = "http://www.myichot.com/wp-content/uploads/2016/09/AdobeStock_52865717-e1479504712602.jpeg";
     const bunImgDefault = "http://www.myichot.com/wp-content/uploads/photo-gallery/imported_from_media_libray/thumb/IMG_9384-e1479505121361.jpg";
     const WaffleImgDefault = "http://www.myichot.com/wp-content/uploads/photo-gallery/20180201_210917.jpg";
-    console.log('selected--->: ', selected)
     const categoryList = [{
             title: "Ice Cream Roll",
             descriptions: "Rolled ice cream gives you the freedom to choose the flavors you want with fresh, quality ingredients. Ice cream artists roll the ice cream and serve it fresh-to-order daily.",
@@ -115,6 +114,7 @@ const Home = () => {
 
     return(
         <div className={classes.wrapper}>
+            <a className={classes.HomeOrderOnline} href="https://www.clover.com/online-ordering/ic-hot-kennesaw">ORDER ONLINE</a>
             <div className={classes.ImgBlock}>
                 <ImgPreNextCarousel 
                     imgSrc={imageList} 
