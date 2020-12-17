@@ -39,6 +39,13 @@ export const homeStyles = createUseStyles({
         display: 'flex',
         justifyContent: 'center',
     },
+    CategoryWrapper: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        textAlign: 'center',
+        margin: '26px 0',
+    },
     CategoryList: {
         maxWdith: '1280px',
         display: 'grid',
@@ -52,4 +59,9 @@ export const homeStyles = createUseStyles({
             gridTemplateColumns: 'auto',
         }
     },
+    MenuOutterWrap: {
+        padding: '8px',
+        margin: '8px',
+        border: '1px dotted',
+    }
 });

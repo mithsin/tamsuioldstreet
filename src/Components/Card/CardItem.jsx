@@ -2,12 +2,12 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { CardItemStyle } from './styles';
 
-const CardItem = ({cardStatus}) => {
+const CardItem = ({cardStatus, index, setSelected}) => {
     let history = useHistory();
     const classes = CardItemStyle();
         
     return(
-        <ul className={classes.CardItem}>
+        <ul className={classes.CardItem} onClick={()=> setSelected(index)}>
             <li className={classes.CardImgWrapper}>
                 <img
                     className={classes.img} 
@@ -17,9 +17,10 @@ const CardItem = ({cardStatus}) => {
 
             <li className={classes.CardTitleLi}>
                 {cardStatus.title}
-                <span>
+                {/* <span>
                     {cardStatus.descriptions}
-                </span>
+                </span> */}
+                <button>SHOW MENU</button>
             </li>
             
         </ul>
