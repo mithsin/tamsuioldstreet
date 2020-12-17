@@ -122,7 +122,7 @@ const Home = () => {
                     arrowEnabled={true}/>
             </div>
             <div className={classes.CategoryWrapper}>
-                <h1>What Do We Offer?</h1>
+                <h1>MENU</h1>
                 <div className={classes.CategoryList}>
                     {categoryList.map((category, index)=> (
                         <CardItem 
