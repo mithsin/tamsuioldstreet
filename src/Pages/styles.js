@@ -10,6 +10,7 @@ export const HeaderStyles = createUseStyles({
         maxWidth: '150px',
         width: '100%',
         marginRight: '2rem',
+        cursor: 'pointer',
         '& img': {
             width: '100%',
         }
