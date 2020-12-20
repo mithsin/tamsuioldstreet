@@ -24,19 +24,19 @@ const Home = () => {
             imgSrc: "http://www.myichot.com/wp-content/uploads/photo-gallery/imported_from_media_libray/thumb/IMG_9180-e1479504951999.jpg",
             menuList: [{
                 imgSrc: iceCreamRollImgDefault,
-                itemNumber: '1',
+                itemNumber: 'A1',
                 title: 'item name',
                 description: 'item description',
                 price: 10.99
             },{
                 imgSrc: iceCreamRollImgDefault,
-                itemNumber: '2',
+                itemNumber: 'A2',
                 title: 'item name',
                 description: 'item description',
                 price: 11.99
             },{
                 imgSrc: iceCreamRollImgDefault,
-                itemNumber: '3',
+                itemNumber: 'A3',
                 title: 'item name',
                 description: 'item description',
                 price: 12.99
@@ -47,19 +47,19 @@ const Home = () => {
             imgSrc: "http://www.myichot.com/wp-content/uploads/2016/09/AdobeStock_52865717-e1479504712602.jpeg",
             menuList: [{
                 imgSrc: acaiBowlImgDefault,
-                itemNumber: '1',
+                itemNumber: 'B1',
                 title: 'item name',
                 description: 'item description',
                 price: 10.99
             },{
                 imgSrc: acaiBowlImgDefault,
-                itemNumber: '2',
+                itemNumber: 'B2',
                 title: 'item name',
                 description: 'item description',
                 price: 11.99
             },{
                 imgSrc: acaiBowlImgDefault,
-                itemNumber: '3',
+                itemNumber: 'B3',
                 title: 'item name',
                 description: 'item description',
                 price: 12.99
@@ -70,19 +70,19 @@ const Home = () => {
             imgSrc: "http://www.myichot.com/wp-content/uploads/photo-gallery/imported_from_media_libray/thumb/IMG_9384-e1479505121361.jpg",
             menuList: [{
                 imgSrc: bunImgDefault,
-                itemNumber: '1',
+                itemNumber: 'C1',
                 title: 'item name',
                 description: 'item description',
                 price: 10.99
             },{
                 imgSrc: bunImgDefault,
-                itemNumber: '2',
+                itemNumber: 'C2',
                 title: 'item name',
                 description: 'item description',
                 price: 11.99
             },{
                 imgSrc: bunImgDefault,
-                itemNumber: '3',
+                itemNumber: 'C3',
                 title: 'item name',
                 description: 'item description',
                 price: 12.99
@@ -93,19 +93,19 @@ const Home = () => {
             imgSrc: "http://www.myichot.com/wp-content/uploads/photo-gallery/20180201_210917.jpg",
             menuList: [{
                 imgSrc: WaffleImgDefault,
-                itemNumber: '1',
+                itemNumber: 'D1',
                 title: 'item name',
                 description: 'item description',
                 price: 10.99
             },{
                 imgSrc: WaffleImgDefault,
-                itemNumber: '2',
+                itemNumber: 'D2',
                 title: 'item name',
                 description: 'item description',
                 price: 11.99
             },{
                 imgSrc: WaffleImgDefault,
-                itemNumber: '3',
+                itemNumber: 'D3',
                 title: 'item name',
                 description: 'item description',
                 price: 12.99

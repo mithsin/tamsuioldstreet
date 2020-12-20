@@ -2,29 +2,6 @@ import React from 'react';
 import ItemCard from 'Components/Card/ItemCard';
 import './styles.scss';
 
-const ItemCardS = ({
-    imgSrc,
-    itemNumber,
-    title,
-    description,
-    price,
-}) => {
-    return(
-        <div className="Item-Card-Wrapper">
-            <div className="Item-Card-Img-block">
-                <span>{itemNumber}</span>
-                <img src={imgSrc} alt={title}/>
-            </div>
-            <div className="Item-Card-Text">
-                <h2>{title}</h2>
-                <p>{description}</p>
-                <span>${price}</span>
-                <button>Detail</button>
-            </div>
-        </div>
-    );
-};
-
 const MenuBox = ({title, descriptions, menuList}) => {
     return(
         <div className="Menu-Box-Wrapper">
@@ -33,7 +10,7 @@ const MenuBox = ({title, descriptions, menuList}) => {
                 <p>{descriptions}</p>
             </div>
             <div className="Menu-Box-Item-Wrapper">
-                {menuList.map((item, index)=> <ItemCard key={`item-${index}`} {...item}/>)}
+                {menuList.map((item, index)=> <ItemCard key={`item-${index}`} item={item}/>)}
             </div>
         </div>
     );

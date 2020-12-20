@@ -1,0 +1,32 @@
+.Cart-Wrapper {
+    width: 400px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+.Cart-User-Info {
+    display: flex;
+    flex-direction: column;
+}
+
+.CartItemList-block {
+    width: 100%;
+    border-bottom: 1px solid black;
+    display: flex;
+
+}
+.CartItemList-img-block {
+    width: 20%;
+    img: {
+        width: 100%;
+    }
+}
+.CartItemList-desc-block {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+}
+.CartItemList-price-block {
+    width: 20%;
+}
