@@ -1,34 +1,16 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { orderDetailState, setCart, setCartUpdate } from 'States/orderSlice';
+import TextField from '@material-ui/core/TextField';
+
+
 import './styles.scss';
 
 const Cart = ({cartItemList}) => {
+    const cartOrderList = useSelector(orderDetailState);
     const wsUri = "wss://pdcp0ixkea.execute-api.us-east-1.amazonaws.com/dev";
     const websocket = new WebSocket(wsUri);
-
-    useEffect(()=>{
-        console.log('ItemDetailsRenders')
-        // websocket.onopen = (evt) => { onOpen(evt) };
-        // websocket.onmessage = function(evt) { onMessage(evt) };
-    },[])
-
-    const CartItemList = ({
-        imgSrc,
-        itemNumber,
-        title,
-        price,
-    }) => useMemo(()=>{
-        return(
-            <ul className="CartItemList-block">
-                <li className="CartItemList-img-block"><img src={imgSrc} alt={`${title}-img`} /></li>
-                <li className="CartItemList-desc-block">
-                    <span>{itemNumber}</span>
-                    <span>{title}</span>
-                </li>
-                <li className="CartItemList-price-block">${price}</li>
-            </ul>
-        )
-    },[cartItemList])
-
+    
     const onOpen = (event) => {
         console.log('connected')
     }
@@ -38,15 +20,65 @@ const Cart = ({cartItemList}) => {
         websocket.close();
     }
 
+    useEffect(()=>{
+        websocket.onopen = (evt) => { onOpen(evt) };
+        // websocket.onmessage = function(evt) { onMessage(evt) };
+    },[]) 
+
     const handleSendMessage = (message) => {
         const sendMessage = {
-            message : message, 
+            message : "You have new order", 
             action : "message"
         }
         console.log('sendMessage->: ', JSON.stringify(sendMessage))
         websocket.send(JSON.stringify(sendMessage));
         // websocket.close();
     }
+
+    const CartItemList = ({ cartItemDetail }) => {
+        const {
+            imgSrc,
+            itemNumber,
+            itemDetails,
+            title,
+            price,
+            orderAmount,
+        } = cartItemDetail;
+        const dispatch = useDispatch();
+        const [currentOrderAmount, setCurrentOrderAmount] = useState(orderAmount)
+        const updatePrice = (parseInt(orderAmount) * price).toFixed(2);
+
+        const handleCheckoutUpdate = (event) => {
+            setCurrentOrderAmount(event.target.value)
+            dispatch(setCartUpdate({...cartItemDetail, orderAmount: event.target.value}))
+        }
+
+        return(
+            <ul className="CartItemList-block">
+                <li className="CartItemList-img-block"><img src={imgSrc} alt={`${title}-img`} /></li>
+                <li className="CartItemList-desc-block">
+                    <span>{itemNumber}</span>
+                    <span>{title}</span>
+                </li>
+                <li className="CartItemList-price-block">
+                    <TextField
+                        id="filled-number"
+                        label="Number"
+                        type="number"
+                        min="1" 
+                        max="50"
+                        value={currentOrderAmount}
+                        onChange={handleCheckoutUpdate}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        variant="filled"
+                        />
+                    ${updatePrice}
+                </li>
+            </ul>
+        )
+    };
 
     return (
         <div className="Cart-Wrapper">
@@ -57,8 +89,10 @@ const Cart = ({cartItemList}) => {
             </div>
             <div>                
                 {
-                    cartItemList.map((item, idx)=>(
-                        <CartItemList key={`${item.title}-${idx}`} {...item} />
+                    cartOrderList.map((item, idx)=>(
+                        <CartItemList 
+                            key={`${item.title}-${idx}`}
+                            cartItemDetail={item} />
                     ))
                 }
             </div>

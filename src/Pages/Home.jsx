@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { homeStyles } from './styles';
 import ImgPreNextCarousel from 'Components/ImageBlock/ImgPreNextCarousel';
+import { useHistory } from 'react-router-dom';
 import CardItem from 'Components/Card/CardItem';
 import MenuBox from 'Components/MenuBox';
 
 const Home = () => {
+    let history = useHistory();
     const classes = homeStyles();
     const [selected, setSelected] = useState(0)
     const imageList = [
@@ -115,6 +117,7 @@ const Home = () => {
     return(
         <div className={classes.wrapper}>
             <a className={classes.HomeOrderOnline} href="https://www.clover.com/online-ordering/ic-hot-kennesaw">ORDER ONLINE</a>
+            <span className={classes.HomeOrderOnlineSpan} onClick={()=> history.push('/cart')}>Cart</span>
             <div className={classes.ImgBlock}>
                 <ImgPreNextCarousel 
                     imgSrc={imageList} 

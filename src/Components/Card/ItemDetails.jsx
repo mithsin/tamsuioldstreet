@@ -26,14 +26,10 @@ const ItemDetails = ({itemDetails, handleOpen, handleClose}) => {
 
     const handleAddItemToCart = async() => {
         const findDetailHistory = cartOrderList.find(itm => itm.itemNumber === itemNumber);
-        // console.log('findDetailHistory--->: ', findDetailHistory)
         const updateCardOrderList = 
             findDetailHistory
                 ? dispatch(setCartUpdate({...itemDetails, orderAmount: currentOrderAmount}))
                 : dispatch(setCart(cartOrderList.concat({...itemDetails, orderAmount: currentOrderAmount})));
-
-        // console.log('updateCardOrderList---->: ', updateCardOrderList)
-        
     };
 
     return (
