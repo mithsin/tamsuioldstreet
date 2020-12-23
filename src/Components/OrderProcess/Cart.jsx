@@ -17,6 +17,8 @@ const Cart = ({cartItemList}) => {
 
     const onMessage = (evt) => {
         console.log('onMessage: ', evt.data)
+        evt?.data && history.push('/payment')
+
     }
 
     websocket.onmessage = function(evt) { onMessage(evt) };
@@ -28,8 +30,9 @@ const Cart = ({cartItemList}) => {
         }
         
         await websocket.send(JSON.stringify(sendMessage));
+        // console.log('websocket send,', await websocket.send(JSON.stringify(sendMessage)))
         // websocket.close();
-        // history.push('/')
+        // history.push('/payment')
     }
 
     const CartItemList = ({ cartItemDetail }) => {

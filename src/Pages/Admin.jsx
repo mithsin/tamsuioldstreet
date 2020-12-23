@@ -14,7 +14,7 @@ const Admin = () => {
     // },[])
 
     websocket.onmessage = (evt) => { 
-        // console.log('admin-onmessage--->:', evt.data) 
+        console.log('admin-onmessage--->:', evt.data) 
         setNotice(evt.data)
         // websocket.close();
     };
