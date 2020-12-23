@@ -45,16 +45,20 @@ export const homeStyles = createUseStyles({
     },
     HomeOrderOnlineSpan: {
         position: 'fixed',
-        right: '0px',
+        right: '16px',
         top: '100px',
         zIndex: '99',
         fontWeight: '600',
         fontSize: '1.5rem',
         border: '1px dotted black',
-        backgroundColor: '#fff',
+        // backgroundColor: '#fff',
         textDecoration: 'none',
         borderRadius: '6px',
         padding: '8px',
+        cursor: 'pointer',
+        '& svg': {
+            color: 'lightblue',
+        }
     },
     wrapper: {
         display: 'flex',

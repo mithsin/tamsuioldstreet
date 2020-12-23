@@ -1,23 +1,23 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 const Admin = () => {
     const wsUri = "wss://pdcp0ixkea.execute-api.us-east-1.amazonaws.com/dev?connectionId=TestId";
     const websocket = new WebSocket(wsUri);
     const [notic, setNotice] = useState()
     
-    const websocketCB = useCallback(()=>{
-        websocket.onopen = (evt) => { console.log('admin-onopen---->: ', evt)};
-    },[])
+    // const websocketCB = useCallback(()=>{
+    //     websocket.onopen = (evnt) => console.log(evnt.data);
+    // },[])
 
-    useEffect(()=>{
-        websocketCB();
-    },[])
+    // useEffect(()=>{
+    //     websocketCB();
+    // },[])
 
-        // websocket.onopen = (evt) => { console.log('admin-onopen---->: ', evt)};
-        websocket.onmessage = (evt) => { 
-            console.log('admin-onmessage--->:', evt.data) 
-            setNotice(evt.data)
-        };
+    websocket.onmessage = (evt) => { 
+        // console.log('admin-onmessage--->:', evt.data) 
+        setNotice(evt.data)
+        // websocket.close();
+    };
 
     return(
         <div>

@@ -4,6 +4,9 @@ import ImgPreNextCarousel from 'Components/ImageBlock/ImgPreNextCarousel';
 import { useHistory } from 'react-router-dom';
 import CardItem from 'Components/Card/CardItem';
 import MenuBox from 'Components/MenuBox';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+
 
 const Home = () => {
     let history = useHistory();
@@ -116,8 +119,10 @@ const Home = () => {
 
     return(
         <div className={classes.wrapper}>
-            <a className={classes.HomeOrderOnline} href="https://www.clover.com/online-ordering/ic-hot-kennesaw">ORDER ONLINE</a>
-            <span className={classes.HomeOrderOnlineSpan} onClick={()=> history.push('/cart')}>Cart</span>
+            {/* <a className={classes.HomeOrderOnline} href="https://www.clover.com/online-ordering/ic-hot-kennesaw">ORDER ONLINE</a> */}
+            <span className={classes.HomeOrderOnlineSpan} onClick={()=> history.push('/cart')}>
+                <FontAwesomeIcon icon={faShoppingCart} className="fa-2x"/>
+            </span>
             <div className={classes.ImgBlock}>
                 <ImgPreNextCarousel 
                     imgSrc={imageList} 

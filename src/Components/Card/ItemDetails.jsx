@@ -5,6 +5,8 @@ import TextField from '@material-ui/core/TextField';
 import './styles.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { MuiButton } from 'Components/MUI';
+
 
 const ItemDetails = ({itemDetails, handleOpen, handleClose}) => {
     const dispatch = useDispatch();
@@ -61,7 +63,18 @@ const ItemDetails = ({itemDetails, handleOpen, handleClose}) => {
                     }}
                     variant="filled"
                     />
-                <button onClick={handleAddItemToCart}>ADD TO CART</button>
+                {/* <button onClick={handleAddItemToCart}>ADD TO CART</button> */}
+                <MuiButton 
+                props={{
+                    color: '#717171',
+                    bgColor: '#a2e6fd',
+                    hColor: "white",
+                    hbgColor: "#287d9a"
+                }}
+                label='ADD TO CART'
+                onClick={handleAddItemToCart}
+                onKeyPress={handleAddItemToCart}
+            />
             </div>
         </div>
     );

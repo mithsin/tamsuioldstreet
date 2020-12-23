@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { orderDetailState, setCart, setCartUpdate } from 'States/orderSlice';
 import TextField from '@material-ui/core/TextField';
+import { FormControl } from '@material-ui/core';
+import { MuiButton } from 'Components/MUI';
 
 
 import './styles.scss';
@@ -13,34 +15,21 @@ const Cart = ({cartItemList}) => {
     const wsUri = "wss://pdcp0ixkea.execute-api.us-east-1.amazonaws.com/dev";
     const websocket = new WebSocket(wsUri);
 
-    const websocketCB = useCallback(()=>{
-        websocket.onopen = (evt) => { onOpen(evt) };
-    },[])
-
-    useEffect(()=>{
-        websocketCB();
-    },[])
-    
-    const onOpen = (event) => {
-        console.log('connected')
-    }
-
     const onMessage = (evt) => {
         console.log('onMessage: ', evt.data)
-        // websocket.close();
     }
 
     websocket.onmessage = function(evt) { onMessage(evt) };
 
-    const handleCheckOut = (message) => {
+    const handleCheckOut = async(message) => {
         const sendMessage = {
             message : "New order available", 
             action : "message"
         }
         
-        websocket.send(JSON.stringify(sendMessage));
-        websocket.close();
-        history.push('/')
+        await websocket.send(JSON.stringify(sendMessage));
+        // websocket.close();
+        // history.push('/')
     }
 
     const CartItemList = ({ cartItemDetail }) => {
@@ -90,21 +79,43 @@ const Cart = ({cartItemList}) => {
 
     return (
         <div className="Cart-Wrapper">
-            <div className="Cart-User-Info">
+            <h1>ORDER DETAILS</h1>
+            {/* <div className="Cart-User-Info">
                 <span>Name</span>
                 <span>Address</span>
                 <span>Phone</span>
+            </div> */}
+            <div className="Cart-User-Info">
+            <FormControl>
+                <TextField required id="standard-basic" label="Name" />
+                <TextField required id="standard-basic" label="Address" />
+                <TextField required id="standard-basic" label="Phone Number" />
+                <TextField required id="standard-basic" label="E-Mail" />
+            </FormControl>
             </div>
-            <div>                
-                {
-                    cartOrderList.map((item, idx)=>(
+            <div className="Cart-Added-Items">                
+                { (cartOrderList.length < 1) 
+                    ? <h2>YOU HAVE NO ADDED ITEM</h2>
+                    : cartOrderList.map((item, idx)=>(
                         <CartItemList 
                             key={`${item.title}-${idx}`}
                             cartItemDetail={item} />
                     ))
                 }
             </div>
-            <button onClick={handleCheckOut}>CHECK OUT</button>
+            {/* <button onClick={handleCheckOut}>CHECK OUT</button> */}
+            <MuiButton 
+                props={{
+                    color: '#717171',
+                    bgColor: '#a2e6fd',
+                    hColor: "white",
+                    hbgColor: "#287d9a"
+                }}
+                disabled={(cartOrderList.length < 1) ? true : false}
+                label='CHECK OUT'
+                onClick={handleCheckOut}
+                onKeyPress={handleCheckOut}
+            />
         </div>
     );
 };
