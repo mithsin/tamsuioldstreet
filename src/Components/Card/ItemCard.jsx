@@ -43,7 +43,10 @@ const ItemCard = ({ item }) => {
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
-                <ItemDetails itemDetails={item} handleOpen={handleOpen} handleClose={handleClose}/>
+                <ItemDetails 
+                    itemDetails={item} 
+                    handleOpen={handleOpen} 
+                    handleClose={handleClose}/>
             </Modal>
         </div>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Home, NotExist } from 'Pages';
+import { Home, NotExist, Admin } from 'Pages';
 import Cart from 'Components/OrderProcess/Cart';
 
 const PageRouter = () => {
@@ -8,6 +8,7 @@ const PageRouter = () => {
     <Switch>
         <Route exact path="/" component = { Home } />
         <Route exact path="/cart" component = { Cart } />
+        <Route exact path="/Admin" component = { Admin } />
         <Route path='*' exact component={NotExist} />
     </Switch>
   );

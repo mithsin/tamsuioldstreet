@@ -30,6 +30,7 @@ const ItemDetails = ({itemDetails, handleOpen, handleClose}) => {
             findDetailHistory
                 ? dispatch(setCartUpdate({...itemDetails, orderAmount: currentOrderAmount}))
                 : dispatch(setCart(cartOrderList.concat({...itemDetails, orderAmount: currentOrderAmount})));
+        handleClose();
     };
 
     return (

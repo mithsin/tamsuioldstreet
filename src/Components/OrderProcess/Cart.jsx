@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { orderDetailState, setCart, setCartUpdate } from 'States/orderSlice';
 import TextField from '@material-ui/core/TextField';
 
@@ -7,9 +8,18 @@ import TextField from '@material-ui/core/TextField';
 import './styles.scss';
 
 const Cart = ({cartItemList}) => {
+    let history = useHistory();
     const cartOrderList = useSelector(orderDetailState);
     const wsUri = "wss://pdcp0ixkea.execute-api.us-east-1.amazonaws.com/dev";
     const websocket = new WebSocket(wsUri);
+
+    const websocketCB = useCallback(()=>{
+        websocket.onopen = (evt) => { onOpen(evt) };
+    },[])
+
+    useEffect(()=>{
+        websocketCB();
+    },[])
     
     const onOpen = (event) => {
         console.log('connected')
@@ -17,22 +27,20 @@ const Cart = ({cartItemList}) => {
 
     const onMessage = (evt) => {
         console.log('onMessage: ', evt.data)
-        websocket.close();
+        // websocket.close();
     }
 
-    useEffect(()=>{
-        websocket.onopen = (evt) => { onOpen(evt) };
-        // websocket.onmessage = function(evt) { onMessage(evt) };
-    },[]) 
+    websocket.onmessage = function(evt) { onMessage(evt) };
 
-    const handleSendMessage = (message) => {
+    const handleCheckOut = (message) => {
         const sendMessage = {
-            message : "You have new order", 
+            message : "New order available", 
             action : "message"
         }
-        console.log('sendMessage->: ', JSON.stringify(sendMessage))
+        
         websocket.send(JSON.stringify(sendMessage));
-        // websocket.close();
+        websocket.close();
+        history.push('/')
     }
 
     const CartItemList = ({ cartItemDetail }) => {
@@ -96,6 +104,7 @@ const Cart = ({cartItemList}) => {
                     ))
                 }
             </div>
+            <button onClick={handleCheckOut}>CHECK OUT</button>
         </div>
     );
 };

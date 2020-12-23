@@ -15,7 +15,7 @@ const Header = () => {
 
     return(
         <div className={classes.wrapper}>
-            <span className={classes.Logo} ><img src="http://www.myichot.com/wp-content/uploads/2016/08/logo2.png" alt="logo"/></span>
+            <span className={classes.Logo} ><img onClick={()=> history.push('/')} src="http://www.myichot.com/wp-content/uploads/2016/08/logo2.png" alt="logo"/></span>
 
             <ul className={classes.MenuList}>
                 {
