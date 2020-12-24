@@ -81,11 +81,15 @@ const Cart = ({cartItemList}) => {
                             variant="outlined"
                             InputLabelProps={{
                                 shrink: true,
-                            }}/>
-                        <span className="AddMinusIconWrapper">
-                            <AddCircle onClick={()=>handleCheckoutAddUpdate(10)} style={{color: 'green', size: '16px', cursor: 'pointer'}}/>
-                            <RemoveCircle onClick={()=>handleCheckoutMinusUpdate(1)} style={{color: 'red', size: '16px', cursor: 'pointer'}}/>
-                        </span>
+                            }}
+                            InputProps={{
+                                endAdornment: (
+                                    <span className="AddMinusIconWrapper">
+                                        <AddCircle onClick={()=>handleCheckoutAddUpdate(10)} style={{color: 'green', size: '16px', cursor: 'pointer'}}/>
+                                        <RemoveCircle onClick={()=>handleCheckoutMinusUpdate(1)} style={{color: 'red', size: '16px', cursor: 'pointer'}}/>
+                                    </span>
+                            )}}/>
+                        
                     </span>
                     ${updatePrice}
                 </li>
