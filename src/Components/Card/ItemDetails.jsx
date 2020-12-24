@@ -50,21 +50,6 @@ const ItemDetails = ({itemDetails, handleOpen, handleClose}) => {
                 <h2>{title}</h2>
                 <p>{description}</p>
                 <span>${price}</span>
-
-                <TextField
-                    id="filled-number"
-                    label="Number"
-                    type="number"
-                    min="1" 
-                    max="50"
-                    value={currentOrderAmount}
-                    onChange={(event)=> setCurrentOrderAmount(event.target.value)}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    variant="filled"
-                    />
-
                 <MuiNumberInput 
                     min="1"
                     max="50"

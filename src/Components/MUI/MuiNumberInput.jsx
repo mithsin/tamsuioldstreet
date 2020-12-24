@@ -14,7 +14,7 @@ const MuiNumberInput = ({
 
     const handleCheckoutAddUpdate = (num) => {
         if(parseInt(currentNumber) < num){
-            setCurrentNumber(parseInt(currentNumber + 1))
+            setCurrentNumber(parseInt(currentNumber) + 1)
         }
     }
     const handleCheckoutMinusUpdate = (num) => {
