@@ -46,7 +46,7 @@ export const homeStyles = createUseStyles({
     HomeOrderOnlineSpan: {
         position: 'fixed',
         right: '16px',
-        top: '100px',
+        top: '50px',
         zIndex: '99',
         fontWeight: '600',
         fontSize: '1.5rem',

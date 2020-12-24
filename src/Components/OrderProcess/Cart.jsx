@@ -16,20 +16,22 @@ const Cart = ({cartItemList}) => {
     const websocket = new WebSocket(wsUri);
 
     const onMessage = (evt) => {
-        console.log('onMessage: ', evt.data)
+        console.log('onMessage: ', evt)
         evt?.data && history.push('/payment')
 
     }
 
     websocket.onmessage = function(evt) { onMessage(evt) };
 
-    const handleCheckOut = async(message) => {
+    const handleCheckOut = (message) => {
+
         const sendMessage = {
             message : "New order available", 
             action : "message"
         }
         
-        await websocket.send(JSON.stringify(sendMessage));
+        websocket.send(JSON.stringify(sendMessage));
+        // console.log("<------------------------=trigger handleCheckOut fun =----------------------------->")
         // console.log('websocket send,', await websocket.send(JSON.stringify(sendMessage)))
         // websocket.close();
         // history.push('/payment')
@@ -90,10 +92,10 @@ const Cart = ({cartItemList}) => {
             </div> */}
             <div className="Cart-User-Info">
             <FormControl>
-                <TextField required id="standard-basic" label="Name" />
-                <TextField required id="standard-basic" label="Address" />
-                <TextField required id="standard-basic" label="Phone Number" />
-                <TextField required id="standard-basic" label="E-Mail" />
+                <TextField required id="Checkout-Name" label="Name" />
+                <TextField required id="Checkout-Address" label="Address" />
+                <TextField required id="Checkout-PhoneNumber" label="Phone Number" />
+                <TextField required id="Checkout-EMail" label="E-Mail" />
             </FormControl>
             </div>
             <div className="Cart-Added-Items">                
