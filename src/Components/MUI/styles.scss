@@ -1,0 +1,18 @@
+.MuiNumberInput-Wrapper {
+    display: flex;
+    flex-basis: 100%;
+    .InputNumberWrapper {
+        display: flex;
+        flex: 1;
+        flex-direction: row;
+        .AddMinusIconWrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            // width: 20%;
+                svg {
+                    flex:auto;
+                }
+        }
+    }
+}

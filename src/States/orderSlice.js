@@ -15,36 +15,42 @@ export const orderSlice = createSlice({
             localStorage.setItem('inCart', JSON.stringify(initCart));
             return { ...state, cart: initCart }
         },
-        // setCartUpdate: (state, action) => {
-        //     const updateCart = state.cart.map(item => {
-        //         return ( item.itemNumber !== action.payload.itemNumber)
-        //             ? item 
-        //             : {...item, ...action.payload}
-        //     })
-        //     localStorage.setItem('inCart', JSON.stringify(updateCart));
-        //     return {...state, cart: updateCart}
-        // },
         setCartUpdate: (state, action) => {
             const updateCart = state.cart.map(item => {
-                const updateItem = parseInt(action.payload.orderAmount) >= 1 && action.payload;
                 return ( item.itemNumber !== action.payload.itemNumber)
                     ? item 
-                    : (
-                        updateItem
-                         ? {...item, ...updateItem}
-                         : {...item}
-                    )
+                    : {...item, ...action.payload}
             })
-            console.log('updateCart--->: ', updateCart)
             localStorage.setItem('inCart', JSON.stringify(updateCart));
             return {...state, cart: updateCart}
         },
+        setDeleteItem: (state, action) => {
+            const updateCart = state.cart.filter(item =>  item.itemNumber !== action.payload.itemNumber);
+            localStorage.setItem('inCart', JSON.stringify(updateCart));
+            return {...state, cart: updateCart}
+        },
+        // setCartUpdate: (state, action) => {
+        //     const updateCart = state.cart.map(item => {
+        //         const updateItem = parseInt(action.payload.orderAmount) >= 1 && action.payload;
+        //         return ( item.itemNumber !== action.payload.itemNumber)
+        //             ? item 
+        //             : (
+        //                 updateItem
+        //                  ? {...item, ...updateItem}
+        //                  : {...item}
+        //             )
+        //     })
+        //     console.log('updateCart--->: ', updateCart)
+        //     localStorage.setItem('inCart', JSON.stringify(updateCart));
+        //     return {...state, cart: updateCart}
+        // },
     },
 });
 
 export const {
     setCart,
-    setCartUpdate
+    setCartUpdate,
+    setDeleteItem,
 } = orderSlice.actions;
 
 export const orderDetailState = state => state.orderState.cart;

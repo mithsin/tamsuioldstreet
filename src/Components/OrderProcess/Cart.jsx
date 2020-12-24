@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { orderDetailState, setCart, setCartUpdate } from 'States/orderSlice';
+import { orderDetailState, setCart, setCartUpdate, setDeleteItem } from 'States/orderSlice';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { AddCircle, RemoveCircle } from '@material-ui/icons';
 import TextField from '@material-ui/core/TextField';
@@ -14,7 +14,7 @@ import './styles.scss';
 const Cart = ({cartItemList}) => {
     let history = useHistory();
     const cartOrderList = useSelector(orderDetailState);
-    const wsUri = "wss://pdcp0ixkea.execute-api.us-east-1.amazonaws.com/dev";
+    const wsUri = process.env.REACT_APP_API_WEBSOCKETS;
     const websocket = new WebSocket(wsUri);
 
     const onMessage = (evt) => {
@@ -48,9 +48,20 @@ const Cart = ({cartItemList}) => {
         const [currentOrderAmount, setCurrentOrderAmount] = useState(orderAmount)
         const updatePrice = (parseInt(orderAmount) * price).toFixed(2);
 
-        const handleCheckoutUpdate = (event) => {
-            setCurrentOrderAmount(event.target.value)
-            dispatch(setCartUpdate({...cartItemDetail, orderAmount: event.target.value}))
+        const handleCheckoutAddUpdate = (num) => {
+            if(parseInt(currentOrderAmount) < num){
+                setCurrentOrderAmount(parseInt(currentOrderAmount + 1))
+                dispatch(setCartUpdate({...cartItemDetail, orderAmount: parseInt(currentOrderAmount) + 1}))
+            }
+        }
+        const handleCheckoutMinusUpdate = (num) => {
+            if(parseInt(currentOrderAmount) > num){
+                setCurrentOrderAmount(parseInt(currentOrderAmount) - 1)
+                dispatch(setCartUpdate({...cartItemDetail, orderAmount: parseInt(currentOrderAmount) - 1}))
+            }
+            if (parseInt(currentOrderAmount) <= num) {
+                dispatch(setDeleteItem({...cartItemDetail}))
+            }
         }
 
         return(
@@ -64,19 +75,16 @@ const Cart = ({cartItemList}) => {
                     <span className="InputNumberWrapper">
                         <TextField
                             id="filled-number"
-                            label="Number"
+                            label=""
                             type="number"
-                            InputProps={{ inputProps: { min: 0, max: 10 } }}
                             value={currentOrderAmount}
-                            onChange={handleCheckoutUpdate}
+                            variant="outlined"
                             InputLabelProps={{
                                 shrink: true,
-                            }}
-                            variant="filled"
-                            />
+                            }}/>
                         <span className="AddMinusIconWrapper">
-                            <AddCircle style={{color: 'green', size: '16px'}}/>
-                            <RemoveCircle style={{color: 'red', size: '16px'}}/>
+                            <AddCircle onClick={()=>handleCheckoutAddUpdate(10)} style={{color: 'green', size: '16px', cursor: 'pointer'}}/>
+                            <RemoveCircle onClick={()=>handleCheckoutMinusUpdate(1)} style={{color: 'red', size: '16px', cursor: 'pointer'}}/>
                         </span>
                     </span>
                     ${updatePrice}

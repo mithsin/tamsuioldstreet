@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
 const Admin = () => {
-    const wsUri = "wss://pdcp0ixkea.execute-api.us-east-1.amazonaws.com/dev?connectionId=TestId";
+    const wsUri = process.env.REACT_APP_API_WEBSOCKETS;
     const websocket = new WebSocket(wsUri);
     const [notic, setNotice] = useState()
     

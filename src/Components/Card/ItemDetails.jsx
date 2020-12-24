@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import './styles.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { MuiButton } from 'Components/MUI';
+import { MuiButton, MuiNumberInput } from 'Components/MUI';
 
 
 const ItemDetails = ({itemDetails, handleOpen, handleClose}) => {
@@ -50,6 +50,7 @@ const ItemDetails = ({itemDetails, handleOpen, handleClose}) => {
                 <h2>{title}</h2>
                 <p>{description}</p>
                 <span>${price}</span>
+
                 <TextField
                     id="filled-number"
                     label="Number"
@@ -63,6 +64,13 @@ const ItemDetails = ({itemDetails, handleOpen, handleClose}) => {
                     }}
                     variant="filled"
                     />
+
+                <MuiNumberInput 
+                    min="1"
+                    max="50"
+                    currentNumber={currentOrderAmount}
+                    setCurrentNumber={setCurrentOrderAmount}
+                />
                 <MuiButton 
                     props={{
                         color: '#717171',
