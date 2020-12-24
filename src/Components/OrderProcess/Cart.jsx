@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { orderDetailState, setCart, setCartUpdate } from 'States/orderSlice';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import { AddCircle, RemoveCircle } from '@material-ui/icons';
 import TextField from '@material-ui/core/TextField';
 import { FormControl } from '@material-ui/core';
 import { MuiButton } from 'Components/MUI';
@@ -31,10 +33,6 @@ const Cart = ({cartItemList}) => {
         }
         
         websocket.send(JSON.stringify(sendMessage));
-        // console.log("<------------------------=trigger handleCheckOut fun =----------------------------->")
-        // console.log('websocket send,', await websocket.send(JSON.stringify(sendMessage)))
-        // websocket.close();
-        // history.push('/payment')
     }
 
     const CartItemList = ({ cartItemDetail }) => {
@@ -63,19 +61,24 @@ const Cart = ({cartItemList}) => {
                     <span>{title}</span>
                 </li>
                 <li className="CartItemList-price-block">
-                    <TextField
-                        id="filled-number"
-                        label="Number"
-                        type="number"
-                        min="1" 
-                        max="50"
-                        value={currentOrderAmount}
-                        onChange={handleCheckoutUpdate}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        variant="filled"
-                        />
+                    <span className="InputNumberWrapper">
+                        <TextField
+                            id="filled-number"
+                            label="Number"
+                            type="number"
+                            InputProps={{ inputProps: { min: 0, max: 10 } }}
+                            value={currentOrderAmount}
+                            onChange={handleCheckoutUpdate}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            variant="filled"
+                            />
+                        <span className="AddMinusIconWrapper">
+                            <AddCircle style={{color: 'green', size: '16px'}}/>
+                            <RemoveCircle style={{color: 'red', size: '16px'}}/>
+                        </span>
+                    </span>
                     ${updatePrice}
                 </li>
             </ul>
@@ -85,11 +88,6 @@ const Cart = ({cartItemList}) => {
     return (
         <div className="Cart-Wrapper">
             <h1>ORDER DETAILS</h1>
-            {/* <div className="Cart-User-Info">
-                <span>Name</span>
-                <span>Address</span>
-                <span>Phone</span>
-            </div> */}
             <div className="Cart-User-Info">
             <FormControl>
                 <TextField required id="Checkout-Name" label="Name" />

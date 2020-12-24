@@ -30,7 +30,27 @@
 }
 .CartItemList-price-block {
     flex-basis: 20%;
+    display: flex;
+    flex-direction: column;
+    .InputNumberWrapper {
+        display: flex;
+        flex-direction: row;
+        .AddMinusIconWrapper {
+            display: flex;
+            flex-direction: column;
+            width: 20%;
+                svg {
+                    height: 50%;
+                }
+        }
+    }
 }
 .Cart-Added-Items {
     margin: 1.5rem 0;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

@@ -63,18 +63,16 @@ const ItemDetails = ({itemDetails, handleOpen, handleClose}) => {
                     }}
                     variant="filled"
                     />
-                {/* <button onClick={handleAddItemToCart}>ADD TO CART</button> */}
                 <MuiButton 
-                props={{
-                    color: '#717171',
-                    bgColor: '#a2e6fd',
-                    hColor: "white",
-                    hbgColor: "#287d9a"
-                }}
-                label='ADD TO CART'
-                onClick={handleAddItemToCart}
-                onKeyPress={handleAddItemToCart}
-            />
+                    props={{
+                        color: '#717171',
+                        bgColor: '#a2e6fd',
+                        hColor: "white",
+                        hbgColor: "#287d9a"
+                    }}
+                    label='ADD TO CART'
+                    onClick={handleAddItemToCart}
+                    onKeyPress={handleAddItemToCart}/>
             </div>
         </div>
     );
