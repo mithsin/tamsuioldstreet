@@ -1,28 +1,9 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './styles.scss';
-import { 
-    faFacebook,
-    faInstagram,
-    faPinterest,
-    faYelp,
-} from '@fortawesome/free-brands-svg-icons';
+import { socialList } from 'StaticDatas';
 
 const Footer = () => {
-    const socialList = [{
-        icon: faFacebook,
-        link: '/faFacebook',
-    },{
-        icon: faInstagram,
-        link: '/faInstagram',
-    },{
-        icon: faPinterest,
-        link: '/faPinterest',
-    },{
-        icon: faYelp,
-        link: '/faYelp',
-    }];
-{/* <FontAwesomeIcon icon={faChevronRight} className="fa-2x"/> */}
     return(
         <div className="Footer">
             <div>Copyright © 2016 IC HOT.</div>
