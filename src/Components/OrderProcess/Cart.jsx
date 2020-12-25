@@ -13,10 +13,16 @@ import './styles.scss';
 
 const Cart = ({cartItemList}) => {
     let history = useHistory();
+    const [totalAmount, setTotalAmount] = useState(0)
     const cartOrderList = useSelector(orderDetailState);
     const wsUri = process.env.REACT_APP_API_WEBSOCKETS;
     const websocket = new WebSocket(wsUri);
-
+    useEffect(()=>{
+        cartOrderList && 
+        setTotalAmount(cartOrderList.reduce((accumulator, current) => {
+            return (accumulator + (parseInt(current.orderAmount) * current.price))
+        }, 0));
+    },[cartOrderList])
     const onMessage = (evt) => {
         console.log('onMessage: ', evt)
         evt?.data && history.push('/payment')
@@ -108,6 +114,7 @@ const Cart = ({cartItemList}) => {
                 <TextField required id="Checkout-EMail" label="E-Mail" />
             </FormControl>
             </div>
+            <h2 className="Cart-Items-in-cart-title">Items in Cart</h2>
             <div className="Cart-Added-Items">                
                 { (cartOrderList.length < 1) 
                     ? <h2>YOU HAVE NO ADDED ITEM</h2>
@@ -117,6 +124,10 @@ const Cart = ({cartItemList}) => {
                             cartItemDetail={item} />
                     ))
                 }
+            </div>
+            <div className="Cart-Total-Amount">
+                <h4>tax: ${(totalAmount * .07).toFixed(2)}</h4>
+                <h3>TOTAL: ${(totalAmount * 1.07).toFixed(2)}</h3>
             </div>
             {/* <button onClick={handleCheckOut}>CHECK OUT</button> */}
             <MuiButton 
