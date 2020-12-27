@@ -29,23 +29,13 @@ export const orderSlice = createSlice({
             localStorage.setItem('inCart', JSON.stringify(updateCart));
             return {...state, cart: updateCart}
         },
-        // setCartUpdate: (state, action) => {
-        //     const updateCart = state.cart.map(item => {
-        //         const updateItem = parseInt(action.payload.orderAmount) >= 1 && action.payload;
-        //         return ( item.itemNumber !== action.payload.itemNumber)
-        //             ? item 
-        //             : (
-        //                 updateItem
-        //                  ? {...item, ...updateItem}
-        //                  : {...item}
-        //             )
-        //     })
-        //     console.log('updateCart--->: ', updateCart)
-        //     localStorage.setItem('inCart', JSON.stringify(updateCart));
-        //     return {...state, cart: updateCart}
-        // },
     },
 });
+
+export const getAllNotFullfilledOrders = () => {};
+export const postNewOrder = () => {};
+export const updateOrderFullFillStatus = () => {};
+export const deleteOrder = () => {}
 
 export const {
     setCart,

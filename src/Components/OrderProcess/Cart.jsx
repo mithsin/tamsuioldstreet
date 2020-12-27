@@ -11,34 +11,54 @@ import { MuiButton } from 'Components/MUI';
 
 import './styles.scss';
 
-const Cart = ({cartItemList}) => {
+const Cart = ({}) => {
     let history = useHistory();
     const [totalAmount, setTotalAmount] = useState(0)
+    const [buyerDetails, setBuyerDetails] = useState({})
     const cartOrderList = useSelector(orderDetailState);
-    const wsUri = process.env.REACT_APP_API_WEBSOCKETS;
-    const websocket = new WebSocket(wsUri);
+    // const wsUri = process.env.REACT_APP_API_WEBSOCKETS;
+    // const websocket = new WebSocket(wsUri);
     useEffect(()=>{
         cartOrderList && 
         setTotalAmount(cartOrderList.reduce((accumulator, current) => {
             return (accumulator + (parseInt(current.orderAmount) * current.price))
         }, 0));
     },[cartOrderList])
-    const onMessage = (evt) => {
-        console.log('onMessage: ', evt)
-        evt?.data && history.push('/payment')
+    
+    // this should happen when payment successful
+        // const onMessage = (evt) => {
+        //     console.log('onMessage: ', evt)
+        //     evt?.data && history.push('/order-receipt')
 
+        // }
+        // websocket.onmessage = function(evt) { onMessage(evt) };
+
+        // const handleCheckOutWebsocket = (message) => {
+
+        //     const sendMessage = {
+        //         message : "New order available", 
+        //         action : "message"
+        //     }
+            
+        //     websocket.send(JSON.stringify(sendMessage));
+        // }
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
+
+  
+    // This should be the function when payment successful
+        // Dispatch order to database and redux store
+        // the change page to receipt
+    const onPaymentSuccessful = () => {
+        
     }
 
-    websocket.onmessage = function(evt) { onMessage(evt) };
+    const handleCheckOut = () => {
+        history.push('/payment')
+    }
 
-    const handleCheckOut = (message) => {
-
-        const sendMessage = {
-            message : "New order available", 
-            action : "message"
-        }
-        
-        websocket.send(JSON.stringify(sendMessage));
+    const buyerInputChange = (event) => {
+        event.preventDefault();
+        setBuyerDetails({...buyerDetails, [event.target.name]: event.target.value})
     }
 
     const CartItemList = ({ cartItemDetail }) => {
@@ -108,10 +128,10 @@ const Cart = ({cartItemList}) => {
             <h1>ORDER DETAILS</h1>
             <div className="Cart-User-Info">
             <FormControl>
-                <TextField required id="Checkout-Name" label="Name" />
-                <TextField required id="Checkout-Address" label="Address" />
-                <TextField required id="Checkout-PhoneNumber" label="Phone Number" />
-                <TextField required id="Checkout-EMail" label="E-Mail" />
+                <TextField required name="name" id="Checkout-Name" label="Name" onChange={buyerInputChange} />
+                <TextField required name="address" id="Checkout-Address" label="Address" onChange={buyerInputChange} />
+                <TextField required name="phoneNumber" id="Checkout-PhoneNumber" label="Phone Number" onChange={buyerInputChange} />
+                <TextField required name="eMail" id="Checkout-EMail" label="E-Mail" onChange={buyerInputChange} />
             </FormControl>
             </div>
             <h2 className="Cart-Items-in-cart-title">Items in Cart</h2>
@@ -145,27 +165,5 @@ const Cart = ({cartItemList}) => {
         </div>
     );
 };
-
-Cart.defaultProps = {
-    cartItemList: [{
-        imgSrc: "http://www.myichot.com/wp-content/uploads/photo-gallery/imported_from_media_libray/thumb/IMG_9180-e1479504951999.jpg",
-        itemNumber: '1',
-        title: 'item name',
-        description: 'item description',
-        price: 10.99
-    },{
-        imgSrc: "http://www.myichot.com/wp-content/uploads/photo-gallery/imported_from_media_libray/thumb/IMG_9180-e1479504951999.jpg",
-        itemNumber: '2',
-        title: 'item name',
-        description: 'item description',
-        price: 11.99
-    },{
-        imgSrc: "http://www.myichot.com/wp-content/uploads/photo-gallery/imported_from_media_libray/thumb/IMG_9180-e1479504951999.jpg",
-        itemNumber: '3',
-        title: 'item name',
-        description: 'item description',
-        price: 12.99
-    }]
-}
 
 export default Cart;
