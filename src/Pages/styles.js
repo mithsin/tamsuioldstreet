@@ -51,7 +51,7 @@ export const homeStyles = createUseStyles({
         fontWeight: '600',
         fontSize: '1.5rem',
         border: '1px dotted black',
-        // backgroundColor: '#fff',
+        backgroundColor: '#ffffff33',
         textDecoration: 'none',
         borderRadius: '6px',
         padding: '8px',

@@ -1,4 +1,8 @@
 export * from 'StaticDatas/socialMedia';
+export * from 'StaticDatas/footerData';
+export * from 'StaticDatas/headerData';
+
+
 
 // Logo
 export const logoImg = "http://www.myichot.com/wp-content/uploads/2016/08/logo2.png";

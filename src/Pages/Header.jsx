@@ -1,18 +1,12 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { headerMenuLinks } from 'StaticDatas';
 import { HeaderStyles } from './styles';
 import { logoImg } from 'StaticDatas'
 
 const Header = () => {
     const history = useHistory();
     const classes = HeaderStyles();
-    const menuList = [{
-        title: "Shout Out",
-        link: "/shout-out",
-    },{
-        title: "Photos",
-        link: "/potos"
-    }];
 
     return(
         <div className={classes.wrapper}>
@@ -20,7 +14,7 @@ const Header = () => {
 
             <ul className={classes.MenuList}>
                 {
-                    menuList.map((type, index)=> 
+                    headerMenuLinks.map((type, index)=> 
                         <li key={`${index}-link`} className={classes.MenuLi}  onClick={()=> history.push(type.link)}>
                             {type.title}
                         </li>)

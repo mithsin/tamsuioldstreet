@@ -2,17 +2,19 @@ import React, { useState } from 'react';
 import { homeStyles } from './styles';
 import ImgPreNextCarousel from 'Components/ImageBlock/ImgPreNextCarousel';
 import { useHistory } from 'react-router-dom';
+import { menuListState } from 'States/menuSlice';
+import { useSelector } from 'react-redux';
 import CardItem from 'Components/Card/CardItem';
 import MenuBox from 'Components/MenuBox';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import {
     imageList,
-    categoryList,
 } from 'StaticDatas';
 
 const Home = () => {
     let history = useHistory();
+    const categoryList = useSelector(menuListState)
     const classes = homeStyles();
     const [selected, setSelected] = useState(0)
    

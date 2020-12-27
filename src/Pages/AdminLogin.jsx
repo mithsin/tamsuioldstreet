@@ -65,6 +65,7 @@ const AdminLogin = () => {
             {/* <img src="https://res.cloudinary.com/paf1david/image/upload/v1599395992/pafpay/oljxozj8fby4beaefipe.png" alt="mimitale" /> */}
             <div className="inner-block-log">
                 {inputErrorMessage && <div>{inputErrorMessage}</div>}
+                <h2>ADMIN LOGIN PAGE</h2>
                 <div className="form-container">
                     {
                         inputSettings.map((inputSetting)=>

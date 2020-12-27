@@ -13,3 +13,30 @@
     justify-content: space-between;
     flex-basis: 16rem;
 }
+
+// AdminLogin
+.outter-block-log {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    height: 80vh;
+    align-items: center;
+}
+.inner-block-log {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    // border: 1px solid black;
+    text-align: center;
+    width: 300px;
+    padding: 10px;
+}
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 300px;
+    width: 100%;
+}
