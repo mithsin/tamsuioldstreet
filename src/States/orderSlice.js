@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-// import axios from 'axios';
+import axios from 'axios';
 
 const localtStorageCart = JSON.parse(localStorage.getItem('inCart'));
 const initState = {
@@ -32,17 +32,28 @@ export const orderSlice = createSlice({
     },
 });
 
-export const getAllNotFullfilledOrders = () => {};
-export const postNewOrder = () => {};
-export const updateOrderFullFillStatus = () => {};
-export const deleteOrder = () => {}
-
 export const {
     setCart,
     setCartUpdate,
     setDeleteItem,
 } = orderSlice.actions;
 
+
+export const getAllNotFullfilledOrders = () => dispatch =>{};
+export const postNewOrder = (newOrderState) => dispatch => {
+    axios.post(process.env.REACT_APP_API_RESTAURANT_ORDER, newOrderState)
+        .then(res => {
+            if(res.data.status === 200){
+                dispatch(setCart([]))
+                localStorage.removeItem('inCart');
+            }
+        })
+        .catch(err=> console.log('new order error: ', err))
+};
+export const updateOrderFullFillStatus = () => dispatch => {};
+export const deleteOrder = () => dispatch => {}
+
 export const orderDetailState = state => state.orderState.cart;
+export const currentOrderNumberIs = state => state.orderState.orderNumber;
 
 export default orderSlice.reducer;

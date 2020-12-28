@@ -1,18 +1,20 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { orderDetailState, setCart, setCartUpdate, setDeleteItem } from 'States/orderSlice';
+import { orderDetailState, postNewOrder, setCartUpdate, setDeleteItem } from 'States/orderSlice';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { AddCircle, RemoveCircle } from '@material-ui/icons';
 import TextField from '@material-ui/core/TextField';
 import { FormControl } from '@material-ui/core';
 import { MuiButton } from 'Components/MUI';
+import moment from 'moment';
 
 
 import './styles.scss';
 
 const Cart = ({}) => {
     let history = useHistory();
+    const dispatch = useDispatch();
     const [totalAmount, setTotalAmount] = useState(0)
     const [buyerDetails, setBuyerDetails] = useState({})
     const cartOrderList = useSelector(orderDetailState);
@@ -48,12 +50,21 @@ const Cart = ({}) => {
     // This should be the function when payment successful
         // Dispatch order to database and redux store
         // the change page to receipt
-    const onPaymentSuccessful = () => {
-        
+    const onPaymentSuccessful = (param) => {
+        dispatch(postNewOrder(param))
     }
 
     const handleCheckOut = () => {
-        history.push('/payment')
+        const param = {
+            orderNumber: '',
+            orderTime: moment().format('MMMM Do YYYY, h:mm:ss a'),
+            fullFillTime: '',
+            fullFillStatus: false,
+            itemDetails: cartOrderList,
+            buyerDetails: {...buyerDetails}
+        }
+        onPaymentSuccessful(param)
+        history.push('/order-receipt')
     }
 
     const buyerInputChange = (event) => {
@@ -157,7 +168,7 @@ const Cart = ({}) => {
                     hColor: "white",
                     hbgColor: "#287d9a"
                 }}
-                disabled={(cartOrderList.length < 1) ? true : false}
+                disable={(cartOrderList.length < 1) ? "true" : "false"}
                 label='CHECK OUT'
                 onClick={handleCheckOut}
                 onKeyPress={handleCheckOut}

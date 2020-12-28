@@ -1,23 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-const wsUri = process.env.REACT_APP_API_WEBSOCKETS;
-const websocket = new WebSocket(wsUri);
 
 const OrderReceipt = () => {
     let history = useHistory();
-    const [disableClose, setDisableClose] = useState(true)
+    const wsUri = process.env.REACT_APP_API_WEBSOCKETS;
+    const websocket = new WebSocket(wsUri);
+    // const [disableClose, setDisableClose] = useState(true)
     
     // triiger websocket to send order on load, and disable button until websocket successfully update the order
-    useEffect(()=>{
+    websocket.onopen = (event) => {        
+        console.log('event on open -->: ', event)  
         const sendMessage = {
             message : "New order available", 
             action : "message"
         }
         
         websocket.send(JSON.stringify(sendMessage));
-    },[])
+    }
+
     const onMessage = (evt) => {
-        evt?.data && setDisableClose(false)
+        console.log('evnt-data----->: ', evt.data)
+        // evt?.data && setDisableClose(false)
+        etv?.cata && websocket.close();
+
     }
     websocket.onmessage = function(evt) { onMessage(evt) };
 
@@ -28,8 +33,8 @@ const OrderReceipt = () => {
                 YOUR ORDER DETAIL
             </div>
             <button 
-                disable={disableClose}
-                onClick={()=> history.push('/payment')}>
+                // disable={disableClose}
+                onClick={()=> history.push('/')}>
                     Close
             </button>
         </>
