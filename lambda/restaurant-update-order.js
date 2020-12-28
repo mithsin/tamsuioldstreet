@@ -5,10 +5,11 @@ exports.handler = (event, context, callback) => {
     var params = {
         TableName: 'Ichot-Orders',
         Key: { ordId : event.ordId },
-        UpdateExpression: 'set #ffs = :ffs',
-        ExpressionAttributeNames: {'#ffs' : 'fullFillStatus'},
+        UpdateExpression: 'set #ffs = :ffs, #ffd = :ffd',
+        ExpressionAttributeNames: {'#ffs' : 'fullFillStatus', '#ffd' : 'fullFillTime'},
         ExpressionAttributeValues: {
           ':ffs' : event.fullFillStatus,
+          ':ffd' : event.fullFillTime
         }
     };
     
@@ -18,7 +19,7 @@ exports.handler = (event, context, callback) => {
             callback(err);
         } else {
             console.log(data.Item);
-            callback(null, { status: 200, upload_status: 'success', data: data});
+            callback(null, { status: 200, upload_status: 'fullfilled success'});
         }
     });
 };

@@ -51,7 +51,19 @@ export const postNewOrder = (newOrderState) => dispatch => {
         .catch(err=> console.log('new order error: ', err))
 };
 export const updateOrderFullFillStatus = () => dispatch => {};
-export const deleteOrder = () => dispatch => {}
+export const deleteOrder = (orderId) => dispatch => {
+    const param = {
+        ordId: orderId
+    }
+    axios.delete(process.env.REACT_APP_API_RESTAURANT_ORDER, param)
+        .then(res => {
+            if(res.data.status === 200){
+                dispatch(setCart([]))
+                localStorage.removeItem('inCart');
+            }
+        })
+        .catch(err=> console.log('new order error: ', err))
+}
 
 export const orderDetailState = state => state.orderState.cart;
 export const currentOrderNumberIs = state => state.orderState.orderNumber;

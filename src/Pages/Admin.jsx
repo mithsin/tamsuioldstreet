@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { MuiButton } from 'Components/MUI';
+import moment from 'moment';
 import axios from 'axios';
 
 const Admin = () => {
@@ -42,16 +44,42 @@ const Admin = () => {
         ordId,
         list,
     }) => {
+        const handleOrderFullfill = (orderId) => {
+            const param = {
+                ordId: orderId,
+                fullFillStatus: true,
+                fullFillTime: moment().format('MMMM Do YYYY, h:mm:ss a'),
+            }
+            axios.put(process.env.REACT_APP_API_RESTAURANT_ORDER, param)
+                .then(res=> {
+                    console.log(res.data)
+                    if(res.data.update_status === "fullfilled success"){
+                        setCurrentOrders(currentOrders.filter(order => order.ordId !== ordId));
+                    }
+                })
+                .catch(err=> console.log(err))
+        }
         return (
             <div>
                 <span>{list}</span>
                 <span>{orderNumber}</span>
                 <span>{orderTime}</span>
                 <span>{ordId}</span>
+                <MuiButton 
+                    props={{
+                        color: '#717171',
+                        bgColor: '#a2e6fd',
+                        hColor: "white",
+                        hbgColor: "#287d9a"
+                    }}
+                    label='Fullfilled'
+                    onClick={()=> handleOrderFullfill(ordId)}
+                    onKeyPress={()=> handleOrderFullfill(ordId)}
+                />
             </div>
         );
     };
-    console.log('currentOrders--->: ', currentOrders)
+    // console.log('currentOrders--->: ', currentOrders.map(order => console.log(moment(order.orderTime).format('h:mm:ss a'))));
 
     return(
         <div>
