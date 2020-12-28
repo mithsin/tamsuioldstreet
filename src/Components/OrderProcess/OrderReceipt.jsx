@@ -9,7 +9,7 @@ const OrderReceipt = () => {
     
     // triiger websocket to send order on load, and disable button until websocket successfully update the order
     websocket.onopen = (event) => {        
-        console.log('event on open -->: ', event)  
+        // console.log('event on open -->: ', event)  
         const sendMessage = {
             message : "New order available", 
             action : "message"
@@ -19,9 +19,9 @@ const OrderReceipt = () => {
     }
 
     const onMessage = (evt) => {
-        console.log('evnt-data----->: ', evt.data)
+        // console.log('evnt-data----->: ', evt.data)
         // evt?.data && setDisableClose(false)
-        etv?.cata && websocket.close();
+        evt?.cata && websocket.close();
 
     }
     websocket.onmessage = function(evt) { onMessage(evt) };
