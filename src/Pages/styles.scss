@@ -40,3 +40,12 @@
     height: 300px;
     width: 100%;
 }
+
+// Admin 
+.Admin-OrderList-Wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
+    // grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+}

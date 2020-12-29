@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { MuiButton } from 'Components/MUI';
-import moment from 'moment';
+import OrderBlock from 'Components/AdminComponents/OrderBlock';
 import axios from 'axios';
 
 const Admin = () => {
@@ -24,6 +23,7 @@ const Admin = () => {
                 .catch(err => console.log(err))
         }
     },[notic]);
+    
     // const websocketCB = useCallback(()=>{
     //     websocket.onopen = (evnt) => console.log(evnt.data);
     // },[])
@@ -38,77 +38,36 @@ const Admin = () => {
         // etv?.cata && websocket.close();
     };
 
-    const OrderBlock = ({
-        orderNumber,
-        orderTime,
-        ordId,
-        list,
-    }) => {
-        const handleOrderFullfill = (orderId) => {
-            const param = {
-                ordId: orderId,
-                fullFillStatus: true,
-                fullFillTime: moment().format('MMMM Do YYYY, h:mm:ss a'),
-            }
-            axios.put(process.env.REACT_APP_API_RESTAURANT_ORDER, param)
-                .then(res=> {
-                    console.log(res.data)
-                    if(res.data.update_status === "fullfilled success"){
-                        setCurrentOrders(currentOrders.filter(order => order.ordId !== ordId));
-                    }
-                })
-                .catch(err=> console.log(err))
-        }
-        return (
-            <div>
-                <span>{list}</span>
-                <span>{orderNumber}</span>
-                <span>{orderTime}</span>
-                <span>{ordId}</span>
-                <MuiButton 
-                    props={{
-                        color: '#717171',
-                        bgColor: '#a2e6fd',
-                        hColor: "white",
-                        hbgColor: "#287d9a"
-                    }}
-                    label='Fullfilled'
-                    onClick={()=> handleOrderFullfill(ordId)}
-                    onKeyPress={()=> handleOrderFullfill(ordId)}
-                />
-            </div>
-        );
+    const daySort = () => {
+        const newOrderArray = currentOrders && currentOrders?.map((order) => {
+            return {...order, orderDate: order.orderTime.split(', ')[0], orderTime: order.orderTime.split(', ')[1]}
+        })
     };
-    // console.log('currentOrders--->: ', currentOrders.map(order => console.log(moment(order.orderTime).format('h:mm:ss a'))));
+    // console.log('daySort--->: ', currentOrders)
 
     return(
         <div>
             <h1>ADMIN DASHBOARD</h1>
-            <button onClick={()=> setNotice('')}>close notice {notic}</button>
+            
             <section>
                 <h2>Order List</h2>
-                <p>
-                    New order: {notic && "NEW ORDER RECEIVED"}
-                </p>
-                {
-                    currentOrders?.map((order, index) => <OrderBlock {...order} list={index} key={index} />)
-                }
-                <p>----------------------------------------------------------------------</p>
-                <ul>
-                    <li>
-                        <h3>Order 1</h3>
-                        <div>onOpen: buyer details</div>
-                        <div>order time</div>
-                        <div>order number</div>
-                        <ul>
-                            <li>
-                                item number
-                                item title
-                                order amount
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                { notic &&
+                    <>
+                        <h3>New order: {notic && "NEW ORDER RECEIVED"}</h3>
+                        <button onClick={()=> setNotice('')}>Acknowledge New Order</button>
+                    </>}
+                <div className="Admin-OrderList-Wrapper">
+                    {
+                        currentOrders?.map((order, index) => 
+                            <OrderBlock
+                                currentOrders={currentOrders}
+                                setCurrentOrders={setCurrentOrders}
+                                order={order} 
+                                index={index} 
+                                key={index} />
+                        )
+                    }
+                </div>
             </section>
             <section>
                 <h2>Menu List</h2>
