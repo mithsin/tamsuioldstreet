@@ -3,7 +3,8 @@ import {createUseStyles} from 'react-jss'
 export const HeaderStyles = createUseStyles({
     wrapper: {
         display: 'flex',
-        flexBasis: '1440px',
+        // flexBasis: '1440px',
+        maxWidth: '1440px',
         justifyContent: 'flex-start',
     },
     Logo: {

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { menuListState, setMenu } from 'States/menuSlice';
 import { useDispatch, useSelector } from 'react-redux';
-
 import axios from 'axios';
+import "./styles.scss";
 
 const StateWrapper = ({children}) => {
     const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const StateWrapper = ({children}) => {
         }
     },[])
     return(
-        <div id="state-wrapper">
+        <div id="state-wrapper" className="StateWrapperBody">
             {children}
         </div>
     );

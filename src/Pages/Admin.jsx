@@ -5,7 +5,7 @@ import axios from 'axios';
 const Admin = () => {
     const [currentOrders, setCurrentOrders] = useState([]);
     const wsUri = process.env.REACT_APP_API_WEBSOCKETS;
-    const websocket = new WebSocket(wsUri);
+    const websocket = new WebSocket(`${wsUri}?ID=admin`);
     const [notic, setNotice] = useState()
     useEffect(()=>{
             axios.get(process.env.REACT_APP_API_RESTAURANT_ORDER)
@@ -32,7 +32,16 @@ const Admin = () => {
     //     websocketCB();
     // },[])
 
+    websocket.onopen = (event) => {
+        console.log('websocket.open--->: ', event)
+    }
+    console.log('websocket state-->: ', websocket.readyState)
+
+
+
     websocket.onmessage = (evt) => { 
+        console.log('<------admin-onmessage--->') 
+
         console.log('admin-onmessage--->:', evt.data) 
         setNotice(evt.data)
         // etv?.cata && websocket.close();
