@@ -6,7 +6,7 @@ const OrderReceipt = () => {
     let history = useHistory();
     const wsUri = process.env.REACT_APP_API_WEBSOCKETS;
     const websocket = new WebSocket(wsUri);
-    const [disableClose, setDisableClose] = useState(false)
+    const [disableClose, setDisableClose] = useState(true)
     
     // triiger websocket to send order on load, and disable button until websocket successfully update the order
     useEffect(()=>{
@@ -25,9 +25,9 @@ const OrderReceipt = () => {
         }
     },[])
     const onMessage = (evt) => {
-        console.log('evnt-data----->: ', evt.data)
-        // evt?.data && setDisableClose(false)
-        // evt?.cata && websocket.close();
+        // console.log('evnt-data----->: ', evt.data)
+        evt?.data && setDisableClose(false)
+        evt?.data && websocket.close();
 
     }
     websocket.onmessage = function(evt) { onMessage(evt) };
@@ -45,7 +45,7 @@ const OrderReceipt = () => {
                     hColor: "white",
                     hbgColor: "#287d9a"
                 }}
-                disable={disableClose ? "true" : "false"}
+                disabled={disableClose}
                 label='CLOSE'
                 onClick={()=> history.push('/')}
                 onKeyPress={()=> history.push('/')}

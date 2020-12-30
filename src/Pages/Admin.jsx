@@ -25,7 +25,7 @@ const Admin = () => {
     },[notic]);
     
     // const websocketCB = useCallback(()=>{
-    //     websocket.onopen = (evnt) => console.log(evnt.data);
+        // websocket.onopen = (evnt) => console.log(evnt.data);
     // },[])
 
     // useEffect(()=>{
@@ -33,9 +33,9 @@ const Admin = () => {
     // },[])
 
     websocket.onopen = (event) => {
-        console.log('websocket.open--->: ', event)
+        // console.log('websocket.open--->: ', event)
     }
-    console.log('websocket state-->: ', websocket.readyState)
+    // console.log('websocket state-->: ', websocket.readyState)
 
 
 
@@ -44,7 +44,7 @@ const Admin = () => {
 
         console.log('admin-onmessage--->:', evt.data) 
         setNotice(evt.data)
-        // etv?.cata && websocket.close();
+        // etv?.data && websocket.close();
     };
 
     const daySort = () => {

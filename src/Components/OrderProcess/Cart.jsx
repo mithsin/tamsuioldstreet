@@ -17,6 +17,7 @@ const Cart = ({}) => {
     const dispatch = useDispatch();
     const [totalAmount, setTotalAmount] = useState(0)
     const [buyerDetails, setBuyerDetails] = useState({})
+    const [disableCheckout, setDisableCheckout] = useState(true)
     const cartOrderList = useSelector(orderDetailState);
     // const wsUri = process.env.REACT_APP_API_WEBSOCKETS;
     // const websocket = new WebSocket(wsUri);
@@ -26,6 +27,10 @@ const Cart = ({}) => {
             return (accumulator + (parseInt(current.orderAmount) * current.price))
         }, 0));
     },[cartOrderList])
+    useEffect(()=>{
+        if(!buyerDetails.name && !buyerDetails.phoneNumber){ setDisableCheckout(true)} 
+        if(buyerDetails.name && buyerDetails.phoneNumber) {setDisableCheckout(false)}
+    },[buyerDetails])
     
     // this should happen when payment successful
         // const onMessage = (evt) => {
@@ -66,9 +71,12 @@ const Cart = ({}) => {
         onPaymentSuccessful(param)
         history.push('/order-receipt')
     }
+    console.log('buyerDetails.name-->: ', buyerDetails.name)
+    console.log('buyerDetails.phoneNumber->;;', buyerDetails.phoneNumber)
 
     const buyerInputChange = (event) => {
         event.preventDefault();
+        // disableCheckout, setDisableCheckout
         setBuyerDetails({...buyerDetails, [event.target.name]: event.target.value})
     }
 
@@ -140,9 +148,9 @@ const Cart = ({}) => {
             <div className="Cart-User-Info">
             <FormControl>
                 <TextField required name="name" id="Checkout-Name" label="Name" onChange={buyerInputChange} />
-                <TextField required name="address" id="Checkout-Address" label="Address" onChange={buyerInputChange} />
+                <TextField name="address" id="Checkout-Address" label="Address" onChange={buyerInputChange} />
                 <TextField required name="phoneNumber" id="Checkout-PhoneNumber" label="Phone Number" onChange={buyerInputChange} />
-                <TextField required name="eMail" id="Checkout-EMail" label="E-Mail" onChange={buyerInputChange} />
+                <TextField name="eMail" id="Checkout-EMail" label="E-Mail" onChange={buyerInputChange} />
             </FormControl>
             </div>
             <h2 className="Cart-Items-in-cart-title">Items in Cart</h2>
@@ -168,7 +176,7 @@ const Cart = ({}) => {
                     hColor: "white",
                     hbgColor: "#287d9a"
                 }}
-                disable={(cartOrderList.length < 1) ? "true" : "false"}
+                disabled={ (disableCheckout && (cartOrderList.length >= 1)) ? true : false }
                 label='CHECK OUT'
                 onClick={handleCheckOut}
                 onKeyPress={handleCheckOut}
