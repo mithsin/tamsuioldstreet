@@ -12,8 +12,7 @@ export const imageList = [
     'http://www.myichot.com/wp-content/uploads/2016/09/IMG_9180-e1479504951999.jpg',
     'http://www.myichot.com/wp-content/uploads/2016/09/AdobeStock_109651968-e1479504909100.jpeg',
     'http://www.myichot.com/wp-content/uploads/2016/09/AdobeStock_76806527-e1479504847717.jpeg',
-    'http://www.myichot.com/wp-content/uploads/2016/09/AdobeStock_52865717-e1479504712602.jpeg',
-    'http://www.myichot.com/wp-content/uploads/2016/08/mmexport1471869935631.jpg'
+    'http://www.myichot.com/wp-content/uploads/2016/09/AdobeStock_52865717-e1479504712602.jpeg'
 ];
 export const iceCreamRollImgDefault = "http://www.myichot.com/wp-content/uploads/photo-gallery/imported_from_media_libray/thumb/IMG_9180-e1479504951999.jpg";
 export const acaiBowlImgDefault = "http://www.myichot.com/wp-content/uploads/2016/09/AdobeStock_52865717-e1479504712602.jpeg";

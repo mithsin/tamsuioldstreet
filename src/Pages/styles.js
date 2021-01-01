@@ -66,13 +66,13 @@ export const homeStyles = createUseStyles({
         flexBasis: '1440px',
         flexDirection: 'column',
     },
-    ImgBlock: {
-        width: '100%',
-        backgroundImage: `url(https://www.funnsnow.com/wp-content/uploads/2017/09/login-bg.jpg)`,
-        backgroundRepeat: 'repeat',
-        display: 'flex',
-        justifyContent: 'center',
-    },
+    // ImgBlock: {
+    //     width: '100%',
+    //     backgroundImage: `url(https://www.funnsnow.com/wp-content/uploads/2017/09/login-bg.jpg)`,
+    //     backgroundRepeat: 'repeat',
+    //     display: 'flex',
+    //     justifyContent: 'center',
+    // },
     CategoryWrapper: {
         display: 'flex',
         flexDirection: 'column',

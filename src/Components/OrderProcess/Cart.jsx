@@ -71,12 +71,10 @@ const Cart = ({}) => {
         onPaymentSuccessful(param)
         history.push('/order-receipt')
     }
-    console.log('buyerDetails.name-->: ', buyerDetails.name)
-    console.log('buyerDetails.phoneNumber->;;', buyerDetails.phoneNumber)
+
 
     const buyerInputChange = (event) => {
         event.preventDefault();
-        // disableCheckout, setDisableCheckout
         setBuyerDetails({...buyerDetails, [event.target.name]: event.target.value})
     }
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { homeStyles } from './styles';
-import ImgPreNextCarousel from 'Components/ImageBlock/ImgPreNextCarousel';
+import ReactResponsiveCarousel from 'Components/ImageBlock/ReactResponsiveCarousel';
 import { useHistory } from 'react-router-dom';
 import { menuListState } from 'States/menuSlice';
 import { useSelector } from 'react-redux';
@@ -25,10 +25,8 @@ const Home = () => {
                 <FontAwesomeIcon icon={faShoppingCart} className="fa-2x"/>
             </span>
             <div className={classes.ImgBlock}>
-                <ImgPreNextCarousel 
-                    imgSrc={imageList} 
-                    selectedIndex={0}
-                    arrowEnabled={true}/>
+                <ReactResponsiveCarousel 
+                    imgList={imageList}/>
             </div>
             <div className={classes.CategoryWrapper}>
                 <h1>MENU</h1>
