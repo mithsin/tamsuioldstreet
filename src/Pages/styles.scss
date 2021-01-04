@@ -1,5 +1,7 @@
 .Footer {
-    margin-top: auto;
+    width: 100%;
+}
+.Footer-Inner-Wrap {
     padding: 0 1rem;
     display: flex;
     justify-content: space-between;
@@ -13,7 +15,39 @@
     justify-content: space-between;
     flex-basis: 16rem;
 }
-.four-zero-four-page {
+
+// AdminLogin
+.outter-block-log {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    height: 80vh;
+    align-items: center;
+}
+.inner-block-log {
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    // border: 1px solid black;
+    text-align: center;
+    width: 300px;
+    padding: 10px;
+}
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 300px;
+    width: 100%;
+}
+
+// Admin 
+.Admin-OrderList-Wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
+    // grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
 }

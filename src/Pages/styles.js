@@ -3,7 +3,8 @@ import {createUseStyles} from 'react-jss'
 export const HeaderStyles = createUseStyles({
     wrapper: {
         display: 'flex',
-        flexBasis: '1440px',
+        // flexBasis: '1440px',
+        maxWidth: '1440px',
         justifyContent: 'flex-start',
     },
     Logo: {
@@ -44,18 +45,35 @@ export const homeStyles = createUseStyles({
         borderRadius: '6px',
         padding: '8px',
     },
+    HomeOrderOnlineSpan: {
+        position: 'fixed',
+        right: '16px',
+        top: '50px',
+        zIndex: '99',
+        fontWeight: '600',
+        fontSize: '1.5rem',
+        border: '1px dotted black',
+        backgroundColor: '#ffffff33',
+        textDecoration: 'none',
+        borderRadius: '6px',
+        padding: '8px',
+        cursor: 'pointer',
+        '& svg': {
+            color: 'lightblue',
+        }
+    },
     wrapper: {
         display: 'flex',
         flexBasis: '1440px',
         flexDirection: 'column',
     },
-    ImgBlock: {
-        width: '100%',
-        backgroundImage: `url(https://www.funnsnow.com/wp-content/uploads/2017/09/login-bg.jpg)`,
-        backgroundRepeat: 'repeat',
-        display: 'flex',
-        justifyContent: 'center',
-    },
+    // ImgBlock: {
+    //     width: '100%',
+    //     backgroundImage: `url(https://www.funnsnow.com/wp-content/uploads/2017/09/login-bg.jpg)`,
+    //     backgroundRepeat: 'repeat',
+    //     display: 'flex',
+    //     justifyContent: 'center',
+    // },
     CategoryWrapper: {
         display: 'flex',
         flexDirection: 'column',
