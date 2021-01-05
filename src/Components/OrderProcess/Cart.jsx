@@ -28,7 +28,7 @@ const Cart = ({}) => {
         }, 0));
     },[cartOrderList])
     useEffect(()=>{
-        if(!buyerDetails.name && !buyerDetails.phoneNumber){ setDisableCheckout(true)} 
+        if(!buyerDetails.name || !buyerDetails.phoneNumber){ setDisableCheckout(true)} 
         if(buyerDetails.name && buyerDetails.phoneNumber) {setDisableCheckout(false)}
     },[buyerDetails])
     
@@ -140,6 +140,8 @@ const Cart = ({}) => {
         )
     };
 
+    console.log('disableCheckout-->: ', disableCheckout)
+
     return (
         <div className="Cart-Wrapper">
             <h1>ORDER DETAILS</h1>
@@ -174,7 +176,7 @@ const Cart = ({}) => {
                     hColor: "white",
                     hbgColor: "#287d9a"
                 }}
-                disabled={ (disableCheckout && (cartOrderList.length >= 1)) ? true : false }
+                disabled={ (disableCheckout || (cartOrderList.length < 1)) ? true : false }
                 label='CHECK OUT'
                 onClick={handleCheckOut}
                 onKeyPress={handleCheckOut}

@@ -23,36 +23,10 @@ const Admin = () => {
                 .catch(err => console.log(err))
         }
     },[notic]);
-    
-    // const websocketCB = useCallback(()=>{
-        // websocket.onopen = (evnt) => console.log(evnt.data);
-    // },[])
-
-    // useEffect(()=>{
-    //     websocketCB();
-    // },[])
-
-    websocket.onopen = (event) => {
-        // console.log('websocket.open--->: ', event)
-    }
-    // console.log('websocket state-->: ', websocket.readyState)
-
-
 
     websocket.onmessage = (evt) => { 
-        // console.log('<------admin-onmessage--->') 
-
-        // console.log('admin-onmessage--->:', evt.data) 
         setNotice(evt.data)
-        // etv?.data && websocket.close();
     };
-
-    const daySort = () => {
-        const newOrderArray = currentOrders && currentOrders?.map((order) => {
-            return {...order, orderDate: order.orderTime.split(', ')[0], orderTime: order.orderTime.split(', ')[1]}
-        })
-    };
-    // console.log('daySort--->: ', currentOrders)
 
     return(
         <div>
