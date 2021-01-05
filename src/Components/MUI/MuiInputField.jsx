@@ -8,7 +8,8 @@ const MuiInputField = ({
   required,
   type,
   name, 
-  label, 
+  label,
+  rows,
   onChange,
   onKeyPress
 }) => {
@@ -21,6 +22,10 @@ const MuiInputField = ({
         type={type? type : 'text'}
         name={name}
         variant="outlined"
+        { ...rows && {
+          multiline: true,
+          rows: rows
+        }}
         onChange={onChange}
         { ...defaultValue && {defaultValue: defaultValue}}
         { ...onKeyPress && {onKeyPress: onKeyPress}}

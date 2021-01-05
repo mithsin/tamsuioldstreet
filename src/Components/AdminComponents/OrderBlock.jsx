@@ -60,7 +60,7 @@ const OrderBlock = ({ order, currentOrders, setCurrentOrders, index}) => {
                     hbgColor: "#287d9a",
                     margin: "auto 0 0 0",
                 }}
-                label='Fullfilled'
+                label='ORDER READY'
                 onClick={()=> handleOrderFullfill(ordId)}
                 onKeyPress={()=> handleOrderFullfill(ordId)}
             />

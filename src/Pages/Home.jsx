@@ -3,6 +3,7 @@ import { homeStyles } from './styles';
 import ReactResponsiveCarousel from 'Components/ImageBlock/ReactResponsiveCarousel';
 import { useHistory } from 'react-router-dom';
 import { menuListState } from 'States/menuSlice';
+import { orderDetailState, postNewOrder, setCartUpdate, setDeleteItem } from 'States/orderSlice';
 import { useSelector } from 'react-redux';
 import CardItem from 'Components/Card/CardItem';
 import MenuBox from 'Components/MenuBox';
@@ -14,6 +15,7 @@ import {
 
 const Home = () => {
     let history = useHistory();
+    const cartOrderList = useSelector(orderDetailState);
     const categoryList = useSelector(menuListState)
     const classes = homeStyles();
     const [selected, setSelected] = useState(0)
@@ -21,9 +23,12 @@ const Home = () => {
 
     return(
         <div className={classes.wrapper}>
-            <span className={classes.HomeOrderOnlineSpan} onClick={()=> history.push('/cart')}>
-                <FontAwesomeIcon icon={faShoppingCart} className="fa-2x"/>
-            </span>
+            {(cartOrderList.length > 0) && 
+                <span className={classes.HomeOrderOnlineSpan} onClick={()=> history.push('/cart')}>
+                    <p>{cartOrderList.length}</p>
+                    <FontAwesomeIcon icon={faShoppingCart} className="fa-2x"/>
+                </span>
+            }
             <div className={classes.ImgBlock}>
                 <ReactResponsiveCarousel 
                     imgList={imageList}/>

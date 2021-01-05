@@ -111,3 +111,27 @@ export const categoryList = [{
             price: 12.99
         }]
 }];
+
+// Photo Page
+export const photoGallery = [
+    'http://www.myichot.com/wp-content/uploads/2016/09/IMG_9180-e1479504951999.jpg',
+    'http://www.myichot.com/wp-content/uploads/2016/09/AdobeStock_109651968-e1479504909100.jpeg',
+    'http://www.myichot.com/wp-content/uploads/2016/09/AdobeStock_76806527-e1479504847717.jpeg',
+    'http://www.myichot.com/wp-content/uploads/2016/09/AdobeStock_52865717-e1479504712602.jpeg',
+    'http://www.myichot.com/wp-content/uploads/2016/09/IMG_9180-e1479504951999.jpg',
+    'http://www.myichot.com/wp-content/uploads/2016/09/AdobeStock_109651968-e1479504909100.jpeg',
+    'http://www.myichot.com/wp-content/uploads/2016/09/AdobeStock_76806527-e1479504847717.jpeg',
+    'http://www.myichot.com/wp-content/uploads/2016/09/AdobeStock_52865717-e1479504712602.jpeg',
+    'http://www.myichot.com/wp-content/uploads/2016/09/IMG_9180-e1479504951999.jpg',
+    'http://www.myichot.com/wp-content/uploads/2016/09/AdobeStock_109651968-e1479504909100.jpeg',
+    'http://www.myichot.com/wp-content/uploads/2016/09/AdobeStock_76806527-e1479504847717.jpeg',
+    'http://www.myichot.com/wp-content/uploads/2016/09/AdobeStock_52865717-e1479504712602.jpeg',
+    'http://www.myichot.com/wp-content/uploads/2016/09/IMG_9180-e1479504951999.jpg',
+    'http://www.myichot.com/wp-content/uploads/2016/09/AdobeStock_109651968-e1479504909100.jpeg',
+    'http://www.myichot.com/wp-content/uploads/2016/09/AdobeStock_76806527-e1479504847717.jpeg',
+    'http://www.myichot.com/wp-content/uploads/2016/09/AdobeStock_52865717-e1479504712602.jpeg',
+    'http://www.myichot.com/wp-content/uploads/2016/09/IMG_9180-e1479504951999.jpg',
+    'http://www.myichot.com/wp-content/uploads/2016/09/AdobeStock_109651968-e1479504909100.jpeg',
+    'http://www.myichot.com/wp-content/uploads/2016/09/AdobeStock_76806527-e1479504847717.jpeg',
+    'http://www.myichot.com/wp-content/uploads/2016/09/AdobeStock_52865717-e1479504712602.jpeg',
+];

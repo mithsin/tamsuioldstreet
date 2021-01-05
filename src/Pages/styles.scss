@@ -16,36 +16,19 @@
     flex-basis: 16rem;
 }
 
-// AdminLogin
-.outter-block-log {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    flex: 1;
-    height: 80vh;
-    align-items: center;
-}
-.inner-block-log {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    width: 300px;
-    padding: 10px;
-}
-.form-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    height: 300px;
+// Photo Gallery
+.PhotoGallery-wrapper {
+    max-width: 1440px;
     width: 100%;
-}
-
-// Admin 
-.Admin-OrderList-Wrapper {
+    display: grid;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
-    grid-gap: 1rem;
+    // grid-template-rows: repeat(auto-fill, minmax(26rem, 1fr));
+    // gap: 1rem;
+    li {
+        img {
+            width: 100%;
+        }
+    }
 }

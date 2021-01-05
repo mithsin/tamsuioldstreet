@@ -3,5 +3,5 @@ export const headerMenuLinks = [{
     link: "/shout-out",
 },{
     title: "Photos",
-    link: "/potos"
+    link: "/photo-gallery"
 }];

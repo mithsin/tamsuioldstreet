@@ -57,6 +57,12 @@ export const homeStyles = createUseStyles({
         borderRadius: '6px',
         padding: '8px',
         cursor: 'pointer',
+        '& p': {
+            position: 'absolute',
+            top: '0',
+            right: '0',
+            margin: '0',
+        },
         '& svg': {
             color: 'lightblue',
         }
