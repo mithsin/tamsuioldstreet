@@ -28,6 +28,7 @@ export const useInputStyles = makeStyles({
   },
   inputStyle: props => {
     return {
+      marginBottom: props.marginBottom || "6px",
       backgroundColor: props.backgroundColor || '#fff',
       color: props.color || '#000',
       width: props.width || "100%",

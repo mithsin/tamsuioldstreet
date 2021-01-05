@@ -3,7 +3,6 @@ import {createUseStyles} from 'react-jss'
 export const HeaderStyles = createUseStyles({
     wrapper: {
         display: 'flex',
-        // flexBasis: '1440px',
         maxWidth: '1440px',
         justifyContent: 'flex-start',
     },
@@ -11,6 +10,7 @@ export const HeaderStyles = createUseStyles({
         maxWidth: '150px',
         width: '100%',
         marginRight: '2rem',
+        cursor: 'pointer',
         '& img': {
             width: '100%',
         }
@@ -57,6 +57,12 @@ export const homeStyles = createUseStyles({
         borderRadius: '6px',
         padding: '8px',
         cursor: 'pointer',
+        '& p': {
+            position: 'absolute',
+            top: '0',
+            right: '0',
+            margin: '0',
+        },
         '& svg': {
             color: 'lightblue',
         }
@@ -66,13 +72,6 @@ export const homeStyles = createUseStyles({
         flexBasis: '1440px',
         flexDirection: 'column',
     },
-    // ImgBlock: {
-    //     width: '100%',
-    //     backgroundImage: `url(https://www.funnsnow.com/wp-content/uploads/2017/09/login-bg.jpg)`,
-    //     backgroundRepeat: 'repeat',
-    //     display: 'flex',
-    //     justifyContent: 'center',
-    // },
     CategoryWrapper: {
         display: 'flex',
         flexDirection: 'column',
@@ -86,12 +85,6 @@ export const homeStyles = createUseStyles({
         gridTemplateColumns: 'repeat(4, 1fr)',
         maxWidth: '1200px',
         margin: 'auto',
-        // '@media only screen and (max-width: 960px) and (min-width: 600px)': {
-        //     gridTemplateColumns: 'repeat(2, 1fr)',
-        // },
-        // '@media only screen and (max-width: 599px)': {
-        //     gridTemplateColumns: 'auto',
-        // }
     },
     MenuOutterWrap: {
         padding: '8px',

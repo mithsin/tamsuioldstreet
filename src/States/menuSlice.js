@@ -13,11 +13,22 @@ export const menuSlice = createSlice({
             const initMenu = action.payload;
             return { ...state, menu: initMenu }
         },
+        setMenuItemUpdate: (state, action) => {
+            const updateMenu = state.menu.map(category => {
+                category.menuList.map(item => 
+                    (item.itemNumber !== action.payload.itemNumber)
+                        ? item
+                        : action.payload)
+            })
+            localStorage.setItem('menu', JSON.stringify(updateMenu));
+            return {...state, menu: updateMenu}
+        },
     },
 });
 
 export const {
     setMenu,
+    setMenuItemUpdate,
 } = menuSlice.actions;
 
 export const setInitMenu = ({}) => dispatch => {
