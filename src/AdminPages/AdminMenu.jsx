@@ -1,14 +1,12 @@
 import React from 'react';
 import { menuListState } from 'States/menuSlice';
 import { useSelector } from 'react-redux';
-import MenuBox from 'Components/MenuBox';
 import ItemCardList from 'Components/Card/ItemCardList';
 import './styles.scss';
 
 
 const AdminMenu = () => {
     const categoryList = useSelector(menuListState)
-    console.log('categoryList--->: ', categoryList)
     return(
         <div>
             <h1>Menu</h1>

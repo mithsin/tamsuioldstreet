@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setMenuItemUpdate } from 'States/menuSlice';
+import { setUpdateMenu } from 'States/menuSlice';
 import TextField from '@material-ui/core/TextField';
 import './styles.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,12 +24,13 @@ const ItemEdit = ({itemDetails, handleOpen, handleClose}) => {
     const [toggleUploadImg, setToggleUploadImg] = useState(true)
 
     useEffect(()=>{
-        setFormInputs({
-            ...formInputs,
-            imgSrc: imageURL
-        })
+        if(imageURL){
+            setFormInputs({
+                ...formInputs,
+                imgSrc: imageURL
+            })
+        }
     },[imageURL])
-    
     const formInputChange = (e) => {
         if(e.target.name === 'points' && (/[^\d]/g).test(e.target.value)){
             setInputError(true)
@@ -43,7 +44,7 @@ const ItemEdit = ({itemDetails, handleOpen, handleClose}) => {
     };
 
     const handleSubmitEdit = () => {
-        dispatch(setMenuItemUpdate(formInputs))
+        dispatch(setUpdateMenu(formInputs))
     };
 
     // input box setting
@@ -101,7 +102,7 @@ const ItemEdit = ({itemDetails, handleOpen, handleClose}) => {
                         <MuiButton 
                             bgColor="#fff"
                             labelColor="#000"
-                            label="EDIT SUBMIT"
+                            label="SUBMIT UPDATE"
                             onClick={ handleSubmitEdit }/>
                     </div>
                 </div>
