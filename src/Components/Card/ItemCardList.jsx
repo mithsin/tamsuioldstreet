@@ -39,6 +39,7 @@ const ItemCardList = ({ item, buttonLabel }) => {
                 onClose={handleClose}
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
+                className="ModalClass"
             >
                 <ItemEdit 
                     itemDetails={item} 
