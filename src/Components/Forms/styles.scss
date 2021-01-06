@@ -1,0 +1,78 @@
+// Item Edit
+.ItemEdit-Wrapper {
+    display: flex;
+    justify-content: center;
+    .inner-block {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center  ;
+        padding: 10px 0;
+        min-width: 300px;
+        width: 95%;
+    }
+    .form-container{
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        justify-content: center;
+        width: 100%;
+    }
+}
+.Item-Details-Edit-Wrapper {
+    width: 400px;
+    background-color: white;
+    padding: 0 8px;
+    .Item-Details-Close {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+// AddNewCategory
+.AddNewCategory-Wrapper {
+    display: flex;
+}
+.form-container {
+    height:auto;
+}
+
+// AddMenuItem
+.AddMenuItem-Wrapper {
+    max-width: 400px;
+    width: 100%;
+    .inner-block {
+     
+        .form-container {
+            height: auto;
+            background-color: white;
+            padding: 16px
+        }
+    }
+}
+
+@media only screen and (max-width: 599px) {
+    .ItemEdit-Wrapper {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .Item-Details-Edit-Wrapper {
+        width: calc(100% - 16px);
+    }
+    .ModalClass {
+        overflow: auto;
+    }
+    // AddMenuItem
+    .AddMenuItem-Wrapper {
+
+        .inner-block {
+           
+            .form-container {
+                height: auto;
+                background-color: white;
+                width: calc(100% - 32px);
+                padding: 16px;
+            }
+        }
+    }
+};

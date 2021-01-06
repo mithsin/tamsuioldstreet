@@ -9,19 +9,18 @@ const StateWrapper = ({children}) => {
     const currentMenuState = useSelector(menuListState)
     useEffect(()=>{
         let menuSession = sessionStorage.getItem('menu');
-        // console.log('menuListState-->: ', currentMenuState)
-        if(currentMenuState !== null && (currentMenuState?.length < 1) && !menuSession){
+        let timeSession = sessionStorage.getItem('menuTime');
+        const timeForceRefresh = (new Date() - new Date(timeSession) > 600000);
+        if((currentMenuState !== null && (currentMenuState?.length < 1) && !menuSession) || timeForceRefresh ){
             axios.get(process.env.REACT_APP_API_RESTAURANT_MENU)
                 .then(res => {
-                    // console.log('res.data--->: ', JSON.stringify(res.data.menu))
                     sessionStorage.setItem('menu', JSON.stringify(res.data.menu));
-
+                    sessionStorage.setItem('menuTime', new Date());
                     dispatch(setMenu(res.data.menu));
                 })
                 .catch(err => console.log(err))
         };
         if(currentMenuState !== null && (currentMenuState?.length < 1) && menuSession){
-            // console.log('menuSession', menuSession)
             dispatch(setMenu(JSON.parse(menuSession)));
         }
     },[])

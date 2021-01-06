@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUpdateMenu } from 'States/menuSlice';
-import TextField from '@material-ui/core/TextField';
-import './styles.scss';
+import { menuListState, setAddNewMenuCategory } from 'States/menuSlice';
+import { MuiButton, MuiInputField } from 'Components/MUI';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { MuiButton, MuiInputField } from 'Components/MUI';
 import ImageUpload from '../ImageUpload/ImageUpload';
+import Modal from '@material-ui/core/Modal';
+import './styles.scss';
 
+const initItemState = {
+    imgSrc: '',
+    itemNumber: '',
+    title: '',
+    description: '',
+    price: '',
+}
 
-const ItemEdit = ({itemDetails, handleOpen, handleClose}) => {
-    const {
-        imgSrc,
-        itemNumber,
-        title,
-        description,
-        price,
-    } = itemDetails;
+const AddMenuItem = ({categoryTitle, open, handleToggle}) => {
     const dispatch = useDispatch();
-    const [formInputs, setFormInputs] = useState({...itemDetails});
+    const  menuState= useSelector(menuListState);
+    const [formInputs, setFormInputs] = useState({...initItemState});
     const [imageURL, setImageURL] = useState('');
-    const [inputError, setInputError] = useState(false)
-    const [toggleUploadImg, setToggleUploadImg] = useState(true)
-
+    const [inputError, setInputError] = useState(false);
+    const [toggleUploadImg, setToggleUploadImg] = useState(true);
     useEffect(()=>{
         if(imageURL){
             setFormInputs({
@@ -31,6 +31,7 @@ const ItemEdit = ({itemDetails, handleOpen, handleClose}) => {
             })
         }
     },[imageURL])
+
     const formInputChange = (e) => {
         if(e.target.name === 'points' && (/[^\d]/g).test(e.target.value)){
             setInputError(true)
@@ -38,43 +39,62 @@ const ItemEdit = ({itemDetails, handleOpen, handleClose}) => {
             setInputError(false)
             setFormInputs({ 
                 ...formInputs,
-                [e.target.name] : e.target.name === 'points' ? parseInt(e.target.value) : e.target.value
+                [e.target.name] :  e.target.value
             })
         }
     };
 
     const handleSubmitEdit = () => {
-        dispatch(setUpdateMenu(formInputs))
+        const fullMenu = menuState.map((category)=>
+            (category.title === categoryTitle)
+                ?  {
+                    ...category,
+                    menuList: category.menuList.concat([formInputs])
+                }
+                : category
+        );
+        // console.log('onsubmit --->: ', fullMenu)
+        dispatch(setAddNewMenuCategory(fullMenu))
+        setFormInputs({})
+        setImageURL('')
     };
 
-    // input box setting
-    const inputSettings = [
-        {
-            type: "text",
-            name: "title", 
-            defaultValue: title,
-            placeholder: "title"
-        },{
-            type: "text",
-            name: "price", 
-            defaultValue: price,
-            placeholder: "price",
-            className: inputError ? 'inputError' : ''
-        },{
-            type: "text",
-            name: "description", 
-            rows: 4,
-            defaultValue: description,
-            placeholder: "item description",
-            className: inputError ? 'inputError' : ''
-        }
-    ];
+    const inputSettings = [{
+        type: "text",
+        name: "itemNumber",
+        placeholder: "itemNumber",
+    },{
+        type: "text",
+        name: "title",
+        placeholder: "title",
+    },{
+        type: "text",
+        name: "description",
+        placeholder: "description",
+    },{
+        type: "text",
+        name: "price",
+        placeholder: "price",
+    }];
 
-    return (
-        <div className="ItemEdit-Wrapper">
-            <div className="Item-Details-Edit-Wrapper">
+    return(
+        <Modal
+            open={open}
+            onClose={handleToggle}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+            style={{
+                overflow: 'auto',
+                display: 'flex',
+                justifyContent: 'center',
+                alignContent: 'center',
+            }}>
+            <div className="AddMenuItem-Wrapper">
                 <div className="inner-block">
                     <div className="form-container" >
+                        <div className="Item-Details-Close">
+                            <FontAwesomeIcon onClick={handleToggle} icon={faTimes} style={{margin: '1rem', cursor: 'pointer'}} className="fa-2x"/>
+                        </div>
                         <button onClick={()=> setToggleUploadImg(!toggleUploadImg)}>
                             {toggleUploadImg ? "upload image link" : "upload image"}
                         </button>
@@ -85,7 +105,6 @@ const ItemEdit = ({itemDetails, handleOpen, handleClose}) => {
                                 type="text"
                                 name="imgSrc"
                                 label="image link"
-                                defaultValue={imgSrc}
                                 onChange={(e)=> setImageURL(e.target.value)}/>}
                             
                         {
@@ -107,24 +126,8 @@ const ItemEdit = ({itemDetails, handleOpen, handleClose}) => {
                     </div>
                 </div>
             </div>
-            <div className="Item-Details-Edit-Wrapper">
-                <div className="Item-Details-Close">
-                    <FontAwesomeIcon onClick={handleClose} icon={faTimes} style={{margin: '1rem', cursor: 'pointer'}} className="fa-2x"/>
-                </div>
-                <div>
-                    <div className="Item-Card-Img-block">
-                        <span>{itemNumber}</span>
-                        <img src={imgSrc} alt={title}/>
-                    </div>
-                </div>
-                <div className="Item-Details-Text">
-                    <h2>{title}</h2>
-                    <p>{description}</p>
-                    <span>${price}</span>
-                </div>
-            </div>
-        </div>
-    );
+        </Modal>
+    )
 };
 
-export default ItemEdit;
+export default AddMenuItem;
