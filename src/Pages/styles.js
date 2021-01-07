@@ -5,7 +5,7 @@ export const HeaderStyles = createUseStyles({
         display: 'flex',
         maxWidth: '1440px',
         justifyContent: 'flex-start',
-        margin: 'auto',
+        margin: '0 auto',
         width: '100%',
     },
     Logo: {
