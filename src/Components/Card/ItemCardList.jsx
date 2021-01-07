@@ -10,6 +10,7 @@ const ItemCardList = ({ item, buttonLabel }) => {
         itemNumber,
         title,
         price,
+        itemDisable,
     } = item;
     const [open, setOpen] = React.useState(false);
 
@@ -20,9 +21,9 @@ const ItemCardList = ({ item, buttonLabel }) => {
     const handleClose = () => {
       setOpen(false);
     };
-
+    
     return(
-        <div className="Item-Card-List-Wrapper">
+        <div className={`Item-Card-List-Wrapper ${itemDisable && 'disable'}`}>
             <div className="Item-Card-List-Img-block">
                 <span>{itemNumber}</span>
                 <img src={imgSrc} alt={title}/>
@@ -39,7 +40,12 @@ const ItemCardList = ({ item, buttonLabel }) => {
                 onClose={handleClose}
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
-                className="ModalClass"
+                style={{
+                    overflow: 'auto',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignContent: 'center',
+                }}
             >
                 <ItemEdit 
                     itemDetails={item} 

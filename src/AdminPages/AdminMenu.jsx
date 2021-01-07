@@ -13,14 +13,20 @@ const AdminMenu = () => {
     const handleAddCategoryToggle = () => setAddCategoryClose(!addCategoryClose);
     return(
         <div>
-            <h1>Menu</h1>
             <div className="Add-Category-Block">
+                <h1>Menu</h1>
                 <FontAwesomeIcon 
                     onClick={handleAddCategoryToggle} 
                     icon={addCategoryClose ? faMinusSquare : faPlusSquare} 
                     style={{margin: '1rem', cursor: 'pointer'}} className="fa-2x"/>
-                {addCategoryClose && <AddCategory />}
+                <p>ADD CATEGORY</p>
             </div>
+                {addCategoryClose && 
+                    <AddCategory
+                        open={addCategoryClose}
+                        handleToggle={()=> setAddCategoryClose(false)}
+                    />
+                }
             {
                 categoryList.map((category, idx)=>
                     <MenuBlock category={category} key={idx}/>

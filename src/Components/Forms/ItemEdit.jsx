@@ -4,6 +4,8 @@ import { setUpdateMenu } from 'States/menuSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { MuiButton, MuiInputField } from 'Components/MUI';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 import ImageUpload from '../ImageUpload/ImageUpload';
 import './styles.scss';
 
@@ -16,6 +18,7 @@ const ItemEdit = ({itemDetails, handleClose}) => {
         price,
     } = itemDetails;
     const dispatch = useDispatch();
+    const [checked, setChecked] = useState(itemDetails.itemDisable ? itemDetails.itemDisable : false);
     const [formInputs, setFormInputs] = useState({...itemDetails});
     const [imageURL, setImageURL] = useState('');
     const [inputError, setInputError] = useState(false)
@@ -32,7 +35,13 @@ const ItemEdit = ({itemDetails, handleClose}) => {
     const formInputChange = (e) => {
         if(e.target.name === 'points' && (/[^\d]/g).test(e.target.value)){
             setInputError(true)
-        } else {
+        } else if (e.target.name === 'itemDisable'){
+            setChecked(!checked);
+            setFormInputs({ 
+                ...formInputs,
+                [e.target.name] : !checked
+            })
+        }else {
             setInputError(false)
             setFormInputs({ 
                 ...formInputs,
@@ -42,7 +51,8 @@ const ItemEdit = ({itemDetails, handleClose}) => {
     };
 
     const handleSubmitEdit = () => {
-        dispatch(setUpdateMenu(formInputs))
+        const fullUpdateMenu = (formInputs.itemDisable === undefined) ? {...formInputs, itemDisable: false} : formInputs;
+        dispatch(setUpdateMenu(fullUpdateMenu))
     };
 
     // input box setting
@@ -85,6 +95,14 @@ const ItemEdit = ({itemDetails, handleClose}) => {
                                 label="image link"
                                 defaultValue={imgSrc}
                                 onChange={(e)=> setImageURL(e.target.value)}/>}
+                        <FormControlLabel
+                            control={
+                                <Checkbox 
+                                    checked={checked} 
+                                    onChange={formInputChange} 
+                                    name="itemDisable" />}
+                            label="Disable"
+                        />
                             
                         {
                             inputSettings.map((inputSetting, index)=>

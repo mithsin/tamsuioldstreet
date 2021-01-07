@@ -15,6 +15,7 @@ const MenuBlock = ({category}) => {
                     onClick={handleAddItemToggle} 
                     icon={addItemClose ? faMinusSquare : faPlusSquare} 
                     style={{margin: '1rem', cursor: 'pointer'}} className="fa-2x"/>
+                    <p>ADD NEW ITEM</p>
                 {addItemClose && 
                     <AddMenuItem 
                         open={addItemClose}

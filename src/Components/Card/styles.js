@@ -9,6 +9,7 @@ export const CardItemStyle = createUseStyles({
         listStyle: 'none',
         margin: '0px',
         padding: '.5rem',
+        flex: '1',
         '& :hover': {
             '& img': {
                 boxShadow: '0px 0px 7px 2px #69c8e6',
@@ -67,7 +68,7 @@ export const CardItemStyle = createUseStyles({
     },
     '@media only screen and (max-width: 960px) and (min-width: 600px)': {
         CardTitleLi: {
-            fontSize: '18px',
+            fontSize: '1.1rem',
         },
     },
     '@media only screen and (max-width: 599px)': {
