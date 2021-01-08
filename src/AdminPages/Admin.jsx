@@ -1,10 +1,17 @@
 import React, { useState, useEffect, useCallback } from 'react';
+
+import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import { userLogout } from 'States/userSlice';
+
 import AdminOrders from './AdminOrders';
 import AdminMenu from './AdminMenu';
 import MuiTabs from 'Components/MUI/MuiTabs';
 import axios from 'axios';
 
 const Admin = () => {
+    const history = useHistory();
+    const dispatch = useDispatch();
     const [currentOrders, setCurrentOrders] = useState([]);
     // const wsUri = process.env.REACT_APP_API_WEBSOCKETS;
     // const websocket = new WebSocket(`${wsUri}?ID=admin`);
@@ -50,7 +57,10 @@ const Admin = () => {
             flexDirection: 'column',
             width: '100%',
         }}>
-            <h1>ADMIN DASHBOARD</h1>
+            <div>
+                <h1>ADMIN DASHBOARD</h1>
+                <button onClick={ ()=> dispatch(userLogout({history})) }>Logout</button>
+            </div>
             <MuiTabs tabArray={tabArray} />
         </div>
     )

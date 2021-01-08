@@ -74,18 +74,21 @@ export const userLogout = ({history}) => dispatch => {
 
 // AWS Cognito Get User Data
 export const userLoginCheck = () => dispatch => {
+    // console.log('userPool.getCurrentUser()-->: ', userPool.getCurrentUser())
     if (userPool.getCurrentUser() != null) {
         userPool.getCurrentUser().getSession((err, session) => {
             if(err){console.log('userPool.getCurrentUser() err---->', err)};
-
-            axios.get(`${ApiGateWayUserURL}?subId=${session?.idToken?.payload?.sub}`, {
-                headers: { 'Authorization' : session?.getIdToken()?.getJwtToken() }
-            })
-                .then(res => {
-                    dispatch(setUserState(res.data));
-                    dispatch(setIsLoggedIn(true));
-                })
-                .catch(error => console.log('get user error: ', error))
+            // dispatch(setUserState(true));
+            dispatch(setIsLoggedIn(true));
+            // console.log('session-->: ', session)
+        //     axios.get(`${ApiGateWayUserURL}?subId=${session?.idToken?.payload?.sub}`, {
+        //         headers: { 'Authorization' : session?.getIdToken()?.getJwtToken() }
+        //     })
+        //         .then(res => {
+        //             dispatch(setUserState(res.data));
+        //             dispatch(setIsLoggedIn(true));
+        //         })
+        //         .catch(error => console.log('get user error: ', error))
           });
     } 
 };
