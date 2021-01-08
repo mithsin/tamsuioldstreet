@@ -16,16 +16,6 @@ export const menuSlice = createSlice({
         setMenuItemUpdate: (state, action) => {
             state.menu = action.payload;
         }
-        // setMenuItemUpdate: (state, action) => {
-        //     const updateMenu = state.menu.map(category => {
-        //         category.menuList.map(item => 
-        //             (item.itemNumber !== action.payload.itemNumber)
-        //                 ? item
-        //                 : action.payload)
-        //     })
-        //     localStorage.setItem('menu', JSON.stringify(updateMenu));
-        //     return {...state, menu: updateMenu}
-        // },
     },
 });
 
@@ -33,23 +23,6 @@ export const {
     setMenu,
     setMenuItemUpdate,
 } = menuSlice.actions;
-
-export const setInitMenu = ({}) => dispatch => {
-    console.log("page")
-    // let menuSession = sessionStorage.getItem('menu');
-    // console.log('menuListState-->: ', menuListState)
-    // if(!menuSession && !menuListState){
-    //     Axios.get(process.env.REACT_APP_API_RESTAURANT_MENU)
-    //         .then(res => {
-    //             dispatch(setMenu(res.data));
-    //             res.data
-    //         })
-    //         .catch(err => console.log(err))
-    // };
-    // if(!menuListState){
-    //     dispatch(setMenu(res.data));
-    // }
-};
 
 export const setUpdateMenu = (menuItem) => (dispatch, getState) => {
     const menuState = getState().menuState.menu;
@@ -71,9 +44,26 @@ export const setUpdateMenu = (menuItem) => (dispatch, getState) => {
         restaurantId: "ichot-1k19fijsal1naskj1",
         menu: updateMenu
     }
-
+    sessionStorage.setItem('menu', JSON.stringify(updateMenu));
     axios.put(process.env.REACT_APP_API_RESTAURANT_MENU, params)
         .then(res=> console.log(res.data))
+        .catch(err => console.log(err));
+};
+
+export const setAddNewMenuCategory = (menuState) => (dispatch) => {
+    const params = {
+        restaurantId: "ichot-1k19fijsal1naskj1",
+        menu: menuState
+    }
+
+    dispatch(setMenuItemUpdate(menuState));
+    sessionStorage.setItem('menu', JSON.stringify(menuState));
+
+    axios.put(process.env.REACT_APP_API_RESTAURANT_MENU, params)
+        .then(res=>{
+            dispatch(setMenuItemUpdate(menuState));
+            sessionStorage.setItem('menu', JSON.stringify(menuState));
+        })
         .catch(err => console.log(err));
 } 
 

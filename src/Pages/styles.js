@@ -5,9 +5,11 @@ export const HeaderStyles = createUseStyles({
         display: 'flex',
         maxWidth: '1440px',
         justifyContent: 'flex-start',
+        margin: '0 auto',
+        width: '100%',
     },
     Logo: {
-        maxWidth: '150px',
+        maxWidth: '9rem',
         width: '100%',
         marginRight: '2rem',
         cursor: 'pointer',
@@ -80,16 +82,26 @@ export const homeStyles = createUseStyles({
         margin: '26px 0',
     },
     CategoryList: {
-        maxWdith: '1280px',
+        maxWidth: '1280px',
         display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
-        maxWidth: '1200px',
+        gridTemplateColumns: 'repeat(5, 1fr)',
+        // gridTemplateColumns: 'repeat(auto-fill, minmax(7rem, 1fr))',
         margin: 'auto',
+        gap: '.5rem'
     },
     MenuOutterWrap: {
         padding: '8px',
         margin: 'auto',
         border: '1px dotted',
         maxWidth: '1240px',
-    }
+    },
+    '@media only screen and (max-width: 599px)': {
+        CategoryList: {
+            maxWidth: '1280px',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(5, 1fr)',
+            margin: 'auto',
+            gap: '0',
+        },
+    },
 });

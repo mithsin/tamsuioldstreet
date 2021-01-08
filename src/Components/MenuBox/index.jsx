@@ -10,7 +10,7 @@ const MenuBox = ({title, descriptions, menuList}) => {
                 <p>{descriptions}</p>
             </div>
             <div className="Menu-Box-Item-Wrapper">
-                {menuList.map((item, index)=> <ItemCard key={`item-${index}`} item={item}/>)}
+                {menuList.map((item, index)=> !item?.itemDisable && <ItemCard key={`item-${index}`} item={item}/>)}
             </div>
         </div>
     );

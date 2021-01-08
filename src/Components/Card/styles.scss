@@ -94,7 +94,12 @@
 // ItemCardList
 .Item-Card-List-Wrapper {
     display: flex;
+    width: calc(100% - 32px);
 };
+.Item-Card-List-Wrapper.disable{
+    display: flex;
+    background-color: rgba(0,0,0,.1);
+}
 .Item-Card-List-Img-block {
     position: relative;
     display: flex;
@@ -148,6 +153,7 @@
 // Item Edit
 .ItemEdit-Wrapper {
     display: flex;
+    justify-content: center;
     .inner-block {
         display: flex;
         justify-content: center;
@@ -187,4 +193,14 @@
     .Item-Details-Wrapper {
         width: 100%;
     }
+    .ItemEdit-Wrapper {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .Item-Details-Edit-Wrapper {
+        width: calc(100% - 16px);
+    }
+    .Item-Card-List-Wrapper {
+        width: calc(100% - 8px);
+    };
 };

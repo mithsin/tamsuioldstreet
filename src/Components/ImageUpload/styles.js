@@ -12,6 +12,6 @@ export const imageUploadStyles = createUseStyles({
         }
     },
     dropBoxSplit: {
-        flex: "1 0 50%"
+        flex: "1 0 30%"
     },
 });

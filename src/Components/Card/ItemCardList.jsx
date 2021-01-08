@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './styles.scss';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import ItemEdit from 'Components/Card/ItemEdit';
+import ItemEdit from 'Components/Forms/ItemEdit';
 
 const ItemCardList = ({ item, buttonLabel }) => {
     const { 
@@ -10,6 +10,7 @@ const ItemCardList = ({ item, buttonLabel }) => {
         itemNumber,
         title,
         price,
+        itemDisable,
     } = item;
     const [open, setOpen] = React.useState(false);
 
@@ -20,9 +21,9 @@ const ItemCardList = ({ item, buttonLabel }) => {
     const handleClose = () => {
       setOpen(false);
     };
-
+    
     return(
-        <div className="Item-Card-List-Wrapper">
+        <div className={`Item-Card-List-Wrapper ${itemDisable && 'disable'}`}>
             <div className="Item-Card-List-Img-block">
                 <span>{itemNumber}</span>
                 <img src={imgSrc} alt={title}/>
@@ -39,6 +40,12 @@ const ItemCardList = ({ item, buttonLabel }) => {
                 onClose={handleClose}
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
+                style={{
+                    overflow: 'auto',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignContent: 'center',
+                }}
             >
                 <ItemEdit 
                     itemDetails={item} 
