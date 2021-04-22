@@ -33,61 +33,28 @@ export const HeaderStyles = createUseStyles({
 });
 
 export const homeStyles = createUseStyles({
-    HomeOrderOnline: {
-        position: 'fixed',
-        right: '0px',
-        top: '26px',
-        zIndex: '99',
-        fontWeight: '600',
-        fontSize: '1.5rem',
-        border: '1px dotted black',
-        backgroundColor: '#fff',
-        textDecoration: 'none',
-        borderRadius: '6px',
-        padding: '8px',
-    },
-    HomeOrderOnlineSpan: {
-        position: 'fixed',
-        right: '16px',
-        top: '50px',
-        zIndex: '99',
-        fontWeight: '600',
-        fontSize: '1.5rem',
-        border: '1px dotted black',
-        backgroundColor: '#ffffff33',
-        textDecoration: 'none',
-        borderRadius: '6px',
-        padding: '8px',
-        cursor: 'pointer',
-        '& p': {
-            position: 'absolute',
-            top: '0',
-            right: '0',
-            margin: '0',
-        },
-        '& svg': {
-            color: 'lightblue',
-        }
-    },
     wrapper: {
         display: 'flex',
         flexBasis: '1440px',
         flexDirection: 'column',
     },
-    CategoryWrapper: {
+    h1: {
+        color: ({ theme }) => theme.text.primaryColor,
+    },
+    categoryWrapper: {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         textAlign: 'center',
         margin: '26px 0',
     },
-    CategoryList: {
+    categoryList: {
         maxWidth: '1280px',
         display: 'grid',
         gridTemplateColumns: 'repeat(5, 1fr)',
-        // gridTemplateColumns: 'repeat(auto-fill, minmax(7rem, 1fr))',
         margin: 'auto',
-        gap: '.5rem'
+        gap: '.5rem',
+        width: '100%',
     },
     MenuOutterWrap: {
         padding: '8px',
@@ -104,4 +71,24 @@ export const homeStyles = createUseStyles({
             gap: '0',
         },
     },
+});
+
+export const FooterStyles = createUseStyles({
+    footerWrapper: {
+        width: "100%",
+    },
+    footerInnerWrap: {
+        padding: "0 1rem",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        boxShadow: "0px 0px 4px 0px #818181",
+        fontSize: "1rem",
+    },
+    footerSocialBlock: {
+        padding: "1rem",
+        display: "flex",
+        justifyContent: "space-between",
+        flexBasis: "16rem",
+    }
 });

@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import './styles.scss';
-import { makeStyles } from '@material-ui/core/styles';
+import { useTheme } from "react-jss";
 import Modal from '@material-ui/core/Modal';
 import ItemDetails from 'Components/Card/ItemDetails';
-
-const rand = () => {
-  return Math.round(Math.random() * 20) - 10;
-}
+import { ItemCardStyle } from './styles';
 
 const ItemCard = ({ item }) => {
+    const theme = useTheme();
+    const classes = ItemCardStyle({ theme });
     const { 
         imgSrc,
         itemNumber,
@@ -26,12 +24,12 @@ const ItemCard = ({ item }) => {
     };
 
     return(
-        <div className="Item-Card-Wrapper">
-            <div className="Item-Card-Img-block">
+        <div className={classes.ItemCardWrapper}>
+            <div className={classes.ItemCardImgblock}>
                 <span>{itemNumber}</span>
                 <img src={imgSrc} alt={title}/>
             </div>
-            <div className="Item-Card-Text">
+            <div className={classes.ItemCardText}>
                 <h2>{title}</h2>
                 {/* <p>{description}</p> */}
                 <span>${price}</span>

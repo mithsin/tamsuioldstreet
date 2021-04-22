@@ -1,0 +1,9 @@
+{
+    "home": {
+        "title" : "HOME PAGE",
+        "menu" : "Menu"
+    },
+    "cardItem": {
+        "showMenu": "Show Menu"
+    }
+}
