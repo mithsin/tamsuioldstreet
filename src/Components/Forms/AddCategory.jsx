@@ -1,22 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { menuListState, setAddNewMenuCategory } from 'States/menuSlice';
-import { MuiButton, MuiInputField } from 'Components/MUI';
+import { MuiInputField } from 'Components/MUI';
+import { EditButton } from 'Components/MUI/MuiComponents/MuiBtn';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import ImageUpload from '../ImageUpload/ImageUpload';
 import Modal from '@material-ui/core/Modal';
 import './styles.scss';
 
-const initItemState = {
-    imgSrc: '',
-    itemNumber: '',
-    title: '',
-    description: '',
-    price: '',
-}
-
-const AddCategory = ({categoryTitle, open, handleToggle}) => {
+const AddCategory = ({open, handleToggle}) => {
     const dispatch = useDispatch();
     const  menuState= useSelector(menuListState);
     const [formInputs, setFormInputs] = useState({menuList: []});
@@ -45,9 +38,10 @@ const AddCategory = ({categoryTitle, open, handleToggle}) => {
     };
 
     const handleSubmitEdit = () => {
-        dispatch(setAddNewMenuCategory([...menuState, formInputs]))
-        setFormInputs({})
-        setImageURL('')
+        dispatch(setAddNewMenuCategory([...menuState, formInputs]));
+        setFormInputs({});
+        setImageURL('');
+        handleToggle();
     };
 
     const inputSettings = [{
@@ -102,10 +96,8 @@ const AddCategory = ({categoryTitle, open, handleToggle}) => {
                                     onChange={ formInputChange }/>
                             )
                         }
-                        <MuiButton 
-                            bgColor="#fff"
-                            labelColor="#000"
-                            label="SUBMIT UPDATE"
+                        <EditButton 
+                            label="ADD"
                             onClick={ handleSubmitEdit }/>
                     </div>
                 </div>

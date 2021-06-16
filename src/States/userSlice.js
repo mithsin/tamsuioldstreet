@@ -13,7 +13,7 @@ const poolData = {
 };
 // const postURL = process.env.REACT_APP_API_GATEWAY_URL;
 const userPool = new CognitoUserPool(poolData);
-const ApiGateWayUserURL = process.env.REACT_APP_API_GATEWAY_USER;
+const ApiGateWayUserURL = process.env.REACT_APP_API_GATEWAY_URL;
 const initState = {
     isLoggedIn: false,
 }
@@ -74,21 +74,19 @@ export const userLogout = ({history}) => dispatch => {
 
 // AWS Cognito Get User Data
 export const userLoginCheck = () => dispatch => {
-    // console.log('userPool.getCurrentUser()-->: ', userPool.getCurrentUser())
     if (userPool.getCurrentUser() != null) {
         userPool.getCurrentUser().getSession((err, session) => {
             if(err){console.log('userPool.getCurrentUser() err---->', err)};
-            // dispatch(setUserState(true));
-            dispatch(setIsLoggedIn(true));
-            // console.log('session-->: ', session)
-        //     axios.get(`${ApiGateWayUserURL}?subId=${session?.idToken?.payload?.sub}`, {
-        //         headers: { 'Authorization' : session?.getIdToken()?.getJwtToken() }
-        //     })
-        //         .then(res => {
-        //             dispatch(setUserState(res.data));
-        //             dispatch(setIsLoggedIn(true));
-        //         })
-        //         .catch(error => console.log('get user error: ', error))
+                dispatch(setIsLoggedIn(true));
+            // axios.get(`${ApiGateWayUserURL}?subId=${session?.idToken?.payload?.sub}`, {
+            //     headers: { 'Authorization' : session?.getIdToken()?.getJwtToken() }
+            // })
+            //     .then(res => {
+            //         console.log('userLoginCheck-trigger--->: ', res.data)
+            //         dispatch(setUserState(res.data));
+            //         dispatch(setIsLoggedIn(true));
+            //     })
+            //     .catch(error => console.log('get user error: ', error))
           });
     } 
 };

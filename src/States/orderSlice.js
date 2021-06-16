@@ -10,6 +10,10 @@ export const orderSlice = createSlice({
     name: 'orderState',
     initialState: initState,
     reducers: {
+        resetCart: (state, action) => {
+            localStorage.setItem('inCart', JSON.stringify(action.payload));
+            state.cart = action.payload;
+        },
         setCart: (state, action) => {
             const initCart = action.payload;
             localStorage.setItem('inCart', JSON.stringify(initCart));
@@ -17,7 +21,8 @@ export const orderSlice = createSlice({
         },
         setCartUpdate: (state, action) => {
             const updateCart = state.cart.map(item => {
-                return ( item.itemNumber !== action.payload.itemNumber)
+
+                return ( item.cartItemNumber !== action.payload.cartItemNumber)
                     ? item 
                     : {...item, ...action.payload}
             })
@@ -25,17 +30,23 @@ export const orderSlice = createSlice({
             return {...state, cart: updateCart}
         },
         setDeleteItem: (state, action) => {
-            const updateCart = state.cart.filter(item =>  item.itemNumber !== action.payload.itemNumber);
+            const updateCart = state.cart.filter(item => item.cartItemNumber !== action.payload.cartItemNumber);
             localStorage.setItem('inCart', JSON.stringify(updateCart));
             return {...state, cart: updateCart}
         },
+        setClearOrderList: (state, action) => {
+            localStorage.removeItem('inCart');
+            return {...state, cart: []}
+        }
     },
 });
 
 export const {
+    resetCart,
     setCart,
     setCartUpdate,
     setDeleteItem,
+    setClearOrderList,
 } = orderSlice.actions;
 
 

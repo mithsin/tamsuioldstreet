@@ -1,28 +1,30 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useTheme } from "react-jss";
+import localization from 'localization';
 import { CardItemStyle } from './styles';
 
-const CardItem = ({cardStatus, index, setSelected}) => {
-    let history = useHistory();
-    const classes = CardItemStyle();
+const CardItem = (props) => {
+    const {cardStatus, index, setSelected} = props;
+    const theme = useTheme();
+    const classes = CardItemStyle({ theme });
         
     return(
         <ul className={classes.CardItem} onClick={()=> setSelected(index)}>
             <li className={classes.CardTitleLi}>
                 {cardStatus.title}
             </li>
-            <li className={classes.CardImgWrapper}>
-                <img
-                    className={classes.img} 
-                    src={cardStatus.imgSrc}
-                    alt='card image' />
+            <li 
+                className={classes.CardImgWrapper}
+                style={{
+                    backgroundImage: `url(${cardStatus.imgSrc})`,
+                    height: "150px",
+                    backgroundPosition: "center",
+                    backgroundSize: "cover",
+                    borderRadius: "2rem"
+                }}>
             </li>
             <li className={classes.CardTitleShowMenu}>
-                SHOW MENU
-                {/* <span>
-                    {cardStatus.descriptions}
-                </span> */}
-                {/* <button>SHOW MENU</button> */}
+                {localization.cardItem.showMenu}
             </li>
         </ul>
     );

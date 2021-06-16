@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setUpdateMenu } from 'States/menuSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { MuiButton, MuiInputField } from 'Components/MUI';
+import { MuiInputField, MuiCheckboxList, MuiCheckboxListWithCheckedInput } from 'Components/MUI';
+import { SubmitButton } from 'Components/MUI/MuiComponents/MuiBtn';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import AddOnBlock from 'Components/Forms/Components/AddOnBlock';
 import ImageUpload from '../ImageUpload/ImageUpload';
+import { setUpdateMenu } from 'States/menuSlice';
+
+import { AddMenuItemHandleChange, SizeHandleChange, SizeInputHandleChange, toggleForLoopList } from './FormSubmitFunctions';
+import {
+    allergenListDefault,
+    sizeListDefault,
+    ItemToggles
+} from './FormDefault';
 import './styles.scss';
 
 const ItemEdit = ({itemDetails, handleClose}) => {
@@ -19,10 +28,14 @@ const ItemEdit = ({itemDetails, handleClose}) => {
     } = itemDetails;
     const dispatch = useDispatch();
     const [checked, setChecked] = useState(itemDetails.itemDisable ? itemDetails.itemDisable : false);
-    const [formInputs, setFormInputs] = useState({...itemDetails});
     const [imageURL, setImageURL] = useState('');
-    const [inputError, setInputError] = useState(false)
-    const [toggleUploadImg, setToggleUploadImg] = useState(true)
+    const [inputError, setInputError] = useState(false);
+    const [toggleUploadImg, setToggleUploadImg] = useState(true);
+    const [toggles, setToggles] = useState(ItemToggles);
+    const [formInputs, setFormInputs] = useState({...itemDetails});
+    const [allergenList, setAllergenList] = useState(itemDetails?.options?.allergens || allergenListDefault);
+    const [sizeList, setSizeList] = useState(itemDetails?.options?.sizes || sizeListDefault);
+    const [addOnList, setAddOnList] = useState(itemDetails?.options?.['add-on']);
 
     useEffect(()=>{
         if(imageURL){
@@ -52,12 +65,60 @@ const ItemEdit = ({itemDetails, handleClose}) => {
 
     const handleSubmitEdit = () => {
         const fullUpdateMenu = (formInputs.itemDisable === undefined) ? {...formInputs, itemDisable: false} : formInputs;
-        dispatch(setUpdateMenu(fullUpdateMenu))
+
+        const isSizeListOn = sizeList.find(size => 
+            (size.on === true) ? true : false
+        )
+
+        const isAllergenListOn = () => {
+            for (var item in allergenList){
+                if(allergenList[item]?.on === true) return true;
+            }
+        }
+
+        // console.log('fullUpdateMenu--->: ', {
+        //     ...fullUpdateMenu, 
+        //     options: { 
+        //         ...fullUpdateMenu?.options, 
+        //         ...(isAllergenListOn() && {allergens: allergenList}),
+        //         ...(isSizeListOn !== undefined && {sizes: sizeList}),
+        //         ...(addOnList?.length > 0 && {
+        //             ['add-on']: addOnList
+        //         })
+        //     }})
+        dispatch(setUpdateMenu({
+            ...fullUpdateMenu, 
+            options: { 
+                ...fullUpdateMenu?.options, 
+                ...(isAllergenListOn() && {allergens: allergenList}),
+                ...(isSizeListOn !== undefined && {sizes: sizeList}),
+                ...(addOnList?.length > 0 && {
+                    ['add-on']: addOnList
+                })
+            }}))
+        handleClose();
     };
 
     // input box setting
-    const inputSettings = [
-        {
+    const inputSettings = [{
+            type: "checkList",
+            listTitle: "Allergens",
+            list: allergenList,
+            handleChange: AddMenuItemHandleChange,
+            setChangeTrigger: setAllergenList,
+        },{
+            type: "checkList",
+            listTitle: "Sizes",
+            list: sizeList,
+            handleChange: SizeHandleChange,
+            setChangeTrigger: setSizeList,
+            inputHandleChange: SizeInputHandleChange
+        },{
+            type: "checkList",
+            listTitle: "Add-on",
+            list: addOnList,
+            setChangeTrigger: setAddOnList,
+        },{
             type: "text",
             name: "title", 
             defaultValue: title,
@@ -103,21 +164,55 @@ const ItemEdit = ({itemDetails, handleClose}) => {
                                     name="itemDisable" />}
                             label="Disable"
                         />
-                            
                         {
-                            inputSettings.map((inputSetting, index)=>
-                                <MuiInputField
-                                    key={`${index}-inputsetting`}
-                                    {...inputSetting}
-                                    bgColor="#fff"
-                                    name={inputSetting.name}
-                                    label={inputSetting.placeholder}
-                                    onChange={ formInputChange }/>
-                            )
+                            <div className="Toggle-Block">
+                                {toggleForLoopList(toggles, setToggles)}
+                            </div>
                         }
-                        <MuiButton 
-                            bgColor="#fff"
-                            labelColor="#000"
+                        {
+                            inputSettings.map((inputSetting, index)=>{
+                                if(inputSetting.type === "checkList"){
+                                    if(toggles?.allergenToggle?.on === true && inputSetting.listTitle === "Allergens") {
+                                        return (
+                                            <MuiCheckboxList
+                                                key={`inputsetting-${index}`}
+                                                {...inputSetting}
+                                                handleChange={inputSetting.handleChange}
+                                                checkBoxState={inputSetting.list}
+                                                setCheckBoxStateUpdate={inputSetting.setChangeTrigger}/>
+                                        )
+                                    }
+                                    if(toggles?.sizeListToggle?.on === true && inputSetting.listTitle === "Sizes") {
+                                        return (
+                                            <MuiCheckboxListWithCheckedInput
+                                                key={`inputsetting-${index}`}
+                                                inputHandleChange={inputSetting.inputHandleChange}
+                                                handleChange={inputSetting.handleChange}
+                                                checkBoxState={inputSetting.list}
+                                                setCheckBoxStateUpdate={inputSetting.setChangeTrigger}/>
+                                        )
+                                    }
+                                    if(toggles?.addOnsToggle?.on === true && inputSetting.listTitle === "Add-on") {
+                                        return (
+                                            <AddOnBlock 
+                                                addOnList={addOnList}
+                                                setAddOnList={setAddOnList}
+                                            /> 
+                                        )
+                                    }
+                                }
+                                if(inputSetting.type === "text"){
+                                    return(
+                                        <MuiInputField
+                                            key={`${index}-inputsetting`}
+                                            {...inputSetting}
+                                            bgColor="#fff"
+                                            name={inputSetting.name}
+                                            label={inputSetting.placeholder}
+                                            onChange={ formInputChange }/>)
+                                }
+                        })}
+                        <SubmitButton  
                             label="SUBMIT UPDATE"
                             onClick={ handleSubmitEdit }/>
                     </div>

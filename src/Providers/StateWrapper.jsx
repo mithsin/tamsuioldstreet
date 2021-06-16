@@ -1,33 +1,29 @@
 import React, { useEffect } from 'react';
-import { menuListState, setMenu } from 'States/menuSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { setMenu } from 'States/menuSlice';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
 import "./styles.scss";
 
 const StateWrapper = ({children}) => {
     const dispatch = useDispatch();
-    const currentMenuState = useSelector(menuListState)
+    const stripePromise = loadStripe("pk_test_51I8WMcEFoepYxM6pCNMtpNb0Tvh8pTLqzYMNrocMJoqBjSQ4Eo5ls4lplxrmSLTGWydlBrAkJp0a9Zgr6tKK8jTw00fquGZFlE");
+
+    // const currentMenuState = useSelector(menuListState)
     useEffect(()=>{
-        let menuSession = sessionStorage.getItem('menu');
-        let timeSession = sessionStorage.getItem('menuTime');
-        const timeForceRefresh = (new Date() - new Date(timeSession) > 600000);
-        if((currentMenuState !== null && (currentMenuState?.length < 1) && !menuSession) || timeForceRefresh ){
-            axios.get(process.env.REACT_APP_API_RESTAURANT_MENU)
-                .then(res => {
-                    sessionStorage.setItem('menu', JSON.stringify(res.data.menu));
-                    sessionStorage.setItem('menuTime', new Date());
-                    dispatch(setMenu(res.data.menu));
-                })
-                .catch(err => console.log(err))
-        };
-        if(currentMenuState !== null && (currentMenuState?.length < 1) && menuSession){
-            dispatch(setMenu(JSON.parse(menuSession)));
-        }
+        axios.get(process.env.REACT_APP_API_RESTAURANT_MENU)
+            .then(res => {
+                dispatch(setMenu(res.data.menu));
+            })
+            .catch(err => console.log(err))
     },[])
     return(
-        <div id="state-wrapper" className="StateWrapperBody">
-            {children}
-        </div>
+        <Elements stripe={stripePromise}>
+            <div id="state-wrapper" className="StateWrapperBody">
+                {children}
+            </div>
+        </Elements>
     );
 };
 

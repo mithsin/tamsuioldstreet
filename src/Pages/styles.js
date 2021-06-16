@@ -22,15 +22,42 @@ export const HeaderStyles = createUseStyles({
         textAlign: 'center',
         alignItems: 'flex-end',
     },
-    MenuLi: {
-        fontSize: '1.5rem',
-        marginRight: '1rem',
-        cursor: 'pointer',
-        '&:hover': {
-            borderBottom: '3px solid #81bed2',
-        },
+    MenuLi: props => {
+        return {
+            fontSize: '1.2rem',
+            marginRight: '1rem',
+            cursor: 'pointer',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            color: props.iconText || '#000',
+            '&:hover': {
+                borderBottom: '3px solid #81bed2',
+            },
+            '& svg': {
+                color: props.iconColor || '#000',
+            }
+        }
     },
 });
+
+export const FooterStyle = createUseStyles({
+    Footer: { width: "100%" },
+    "Footer-Inner-Wrap": {
+        padding: "0 1rem",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        boxShadow: "0px 0px 4px 0px #818181",
+        fontSize: "1rem"
+    },
+    "Footer-Social-Block": {
+        padding: "1rem",
+        display: "flex",
+        justifyContent: "space-between",
+        flexBasis: "16rem"
+    }      
+})
 
 export const homeStyles = createUseStyles({
     HomeOrderOnline: {
@@ -46,27 +73,29 @@ export const homeStyles = createUseStyles({
         borderRadius: '6px',
         padding: '8px',
     },
-    HomeOrderOnlineSpan: {
-        position: 'fixed',
-        right: '16px',
-        top: '50px',
-        zIndex: '99',
-        fontWeight: '600',
-        fontSize: '1.5rem',
-        border: '1px dotted black',
-        backgroundColor: '#ffffff33',
-        textDecoration: 'none',
-        borderRadius: '6px',
-        padding: '8px',
-        cursor: 'pointer',
-        '& p': {
-            position: 'absolute',
-            top: '0',
-            right: '0',
-            margin: '0',
-        },
-        '& svg': {
-            color: 'lightblue',
+    HomeOrderOnlineCartIcon: props => {
+        return {
+            position: 'fixed',
+            right: '16px',
+            top: '50px',
+            zIndex: '99',
+            fontWeight: '600',
+            fontSize: '1.5rem',
+            border: '1px dotted black',
+            backgroundColor: '#ffffff33',
+            textDecoration: 'none',
+            borderRadius: '6px',
+            padding: '8px',
+            cursor: 'pointer',
+            '& p': {
+                position: 'absolute',
+                top: '0',
+                right: '0',
+                margin: '0',
+            },
+            '& svg': {
+                color: props.iconColor || '#000',
+            }
         }
     },
     wrapper: {
@@ -85,9 +114,9 @@ export const homeStyles = createUseStyles({
         maxWidth: '1280px',
         display: 'grid',
         gridTemplateColumns: 'repeat(5, 1fr)',
-        // gridTemplateColumns: 'repeat(auto-fill, minmax(7rem, 1fr))',
         margin: 'auto',
-        gap: '.5rem'
+        gap: '.5rem',
+        width: '100%',
     },
     MenuOutterWrap: {
         padding: '8px',

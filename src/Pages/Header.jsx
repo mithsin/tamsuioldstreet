@@ -1,12 +1,11 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { headerMenuLinks } from 'StaticDatas';
+import { headerMenuLinks, logoImg } from 'StaticDatas';
 import { HeaderStyles } from './styles';
-import { logoImg } from 'StaticDatas'
 
-const Header = () => {
+const Header = ({theme}) => {
     const history = useHistory();
-    const classes = HeaderStyles();
+    const classes = HeaderStyles({...theme.iconsType.header});
 
     return(
         <div className={classes.wrapper}>
@@ -15,7 +14,8 @@ const Header = () => {
             <ul className={classes.MenuList}>
                 {
                     headerMenuLinks.map((type, index)=> 
-                        <li key={`${index}-link`} className={classes.MenuLi}  onClick={()=> history.push(type.link)}>
+                        type?.link && <li key={`${index}-link`} className={classes.MenuLi}  onClick={()=> history.push(type.link)}>
+                            {type.icon}
                             {type.title}
                         </li>)
                 }
