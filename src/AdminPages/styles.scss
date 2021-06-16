@@ -1,0 +1,39 @@
+// AdminLogin
+.outter-block-log {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    height: 80vh;
+    align-items: center;
+}
+.inner-block-log {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    width: 300px;
+    padding: 10px;
+}
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 300px;
+    width: 100%;
+}
+
+// Admin
+.AdminOrders-OrderList-Wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
+    grid-gap: 1rem;
+    padding-bottom: 2rem;
+    border-bottom: 3px solid;
+}
+.Add-Category-Block {
+    display: flex;
+    align-items: center;
+}
