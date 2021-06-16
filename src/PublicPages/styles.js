@@ -103,14 +103,17 @@ export const homeStyles = createUseStyles({
         flexBasis: '1440px',
         flexDirection: 'column',
     },
-    CategoryWrapper: {
+    h1: {
+        color: ({ theme }) => theme.text.primaryColor,
+    },
+    categoryWrapper: {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         textAlign: 'center',
         margin: '26px 0',
     },
-    CategoryList: {
+    categoryList: {
         maxWidth: '1280px',
         display: 'grid',
         gridTemplateColumns: 'repeat(5, 1fr)',
@@ -133,4 +136,24 @@ export const homeStyles = createUseStyles({
             gap: '0',
         },
     },
+});
+
+export const FooterStyles = createUseStyles({
+    footerWrapper: {
+        width: "100%",
+    },
+    footerInnerWrap: {
+        padding: "0 1rem",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        boxShadow: "0px 0px 4px 0px #818181",
+        fontSize: "1rem",
+    },
+    footerSocialBlock: {
+        padding: "1rem",
+        display: "flex",
+        justifyContent: "space-between",
+        flexBasis: "16rem",
+    }
 });

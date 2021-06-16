@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
+import { useTheme } from "react-jss";
+import { useSelector } from 'react-redux';
+import localization from 'localization';
+import { imageList } from 'StaticDatas';
+import { menuListState } from 'States/menuSlice';
 import { homeStyles } from './styles';
+
+// Components
 import ReactResponsiveCarousel from 'Components/ImageBlock/ReactResponsiveCarousel';
 import { useHistory } from 'react-router-dom';
 import { menuListState } from 'States/menuSlice';
@@ -35,9 +42,9 @@ const Home = () => {
                 <ReactResponsiveCarousel 
                     imgList={imageList}/>
             </div>
-            <div className={classes.CategoryWrapper}>
-                <h1>MENU</h1>
-                <div className={classes.CategoryList}>
+           <div className={classes.categoryWrapper}>
+                <h1>{localization.home.menu}</h1>
+                <div className={classes.categoryList}>
                     {categoryList.map((category, index)=> (
                         <CardItem 
                             cardStatus={category} 

@@ -1,6 +1,7 @@
 import React from 'react';
 import PageRouter from 'PageRouter';
-import { Header, Footer } from 'Pages';
+import { createUseStyles, ThemeProvider, useTheme } from "react-jss";
+import { Header, Footer } from 'PublicPages';
 import StateWrapper from 'Providers/StateWrapper';
 import {useTheme} from 'react-jss';
 
