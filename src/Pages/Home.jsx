@@ -10,6 +10,7 @@ import MenuBox from 'Components/MenuBox';
 import {useTheme} from 'react-jss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import localization from 'localization';
 import {
     imageList,
 } from 'StaticDatas';
@@ -31,12 +32,11 @@ const Home = () => {
                     <FontAwesomeIcon icon={faShoppingCart} className="fa-2x"/>
                 </span>
             }
-            <div className={classes.ImgBlock}>
-                <ReactResponsiveCarousel 
-                    imgList={imageList}/>
+            <div className={classes.ImgBlock} style={{backgroundImage: `url(${imageList[0]})`}}>
+                {/* <img alt="banner" src={imageList[0]} /> */}
             </div>
             <div className={classes.CategoryWrapper}>
-                <h1>MENU</h1>
+                {/* <h1>{localization.home.menu}</h1>
                 <div className={classes.CategoryList}>
                     {categoryList.map((category, index)=> (
                         <CardItem 
@@ -48,6 +48,13 @@ const Home = () => {
                 </div>
                 <div className={classes.MenuOutterWrap}>
                     <MenuBox {...categoryList[selected]} />
+                </div> */}
+                <div className={classes.itemWrapper}>
+                    <div>
+                        <div>Title</div>
+                        <div>descriptions</div>
+                        <button>More Details</button>
+                    </div>
                 </div>
             </div>
         </div>

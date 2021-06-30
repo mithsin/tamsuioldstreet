@@ -7,6 +7,7 @@ import AdminOrders from './AdminOrders';
 import AdminMenu from './AdminMenu';
 import MuiTabs from 'Components/MUI/MuiTabs';
 import axios from 'axios';
+import localization from 'localization';
 
 const Admin = () => {
     const dispatch = useDispatch();
@@ -48,7 +49,7 @@ const Admin = () => {
                 currentOrders={currentOrders}
                 setCurrentOrders={setCurrentOrders}/>
     },{
-        title: "MENU",
+        title: `${localization.admin.menu}`,
         page: <AdminMenu />
     }];
 

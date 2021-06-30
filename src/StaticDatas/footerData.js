@@ -1,1 +1,1 @@
-export const copyRight = "Copyright © 2016 IC HOT.";
+export const copyRight = "Copyright © 2020 Tam Sui Old Street.";

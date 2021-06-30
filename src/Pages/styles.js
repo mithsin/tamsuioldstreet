@@ -103,6 +103,13 @@ export const homeStyles = createUseStyles({
         flexBasis: '1440px',
         flexDirection: 'column',
     },
+    ImgBlock: {
+        width: '100%',
+        height: '50vh',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+    },
     CategoryWrapper: {
         display: 'flex',
         flexDirection: 'column',

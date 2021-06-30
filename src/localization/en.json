@@ -8,5 +8,8 @@
     },
     "itemDetails": {
         "addBtn": "ADD TO CART"
+    },
+    "admin": {
+        "menu": "MENU"
     }
 }

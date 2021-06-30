@@ -8,5 +8,8 @@
     },
     "itemDetails": {
         "addBtn": "買"
+    },
+    "admin": {
+        "menu": "菜單"
     }
 }
